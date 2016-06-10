@@ -1,0 +1,6 @@
+/.settings/
+/build/
+**/*.jar
+**/lib/*.jar
+*.jar
+*.zip
