@@ -6,16 +6,16 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Profile Page</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="jquery-1.7.1.min.js"></script>
 <script type="text/javascript">
 
 function ajaxViewEmp(){
 	
     var emailId = '';
     if ($("#searchEmpId").val() == '' && $("#searchemail").val() == '') {
-    	emailId = 'employeeId=' + $("#empId").val()+'&emailId=' + $("#email").val();
+    	emailId = 'emp_Id=' + $("#empId").val()+'&emailId=' + $("#email").val();
     } else {
-    	emailId = 'employeeId=' + $("#searchEmpId").val()+'&emailId=' + $("#searchemail").val();
+    	emailId = 'emp_Id=' + $("#searchEmpId").val()+'&emailId=' + $("#searchemail").val();
     }
      
     alert("email arg "+ emailId);

@@ -45,11 +45,17 @@ public class DBServices {
 	public static MongoCollection<Document> getEmployeeCollection() {
 	
 		MongoDatabase db = getSourceDB();
+		System.out.println("Connected to DB");
 		MongoCollection<Document> coll = db.getCollection("employees");
+		if (coll == null) {
+			throw new RuntimeException("mongo db connect error");
+		}
+		System.out.println("Connected to Employees collection");
 		return coll;
 	}
 	
 	public static String findEmployee(String emp_id, String email_id) {
+		System.out.println("findEmployee: emp_id:"+emp_id + ":email_id:" + email_id);
 		Document result = null;
 		String output = null;
 		MongoCollection<Document> coll = getEmployeeCollection();
@@ -69,19 +75,22 @@ public class DBServices {
 		return output;
 	}
 	
-	public static String addEmployee(String employeeJson, String email_id) {
+	public static String addEmployee(String employeeJson) {
+		System.out.println("addEmployee: employeeJson:"+employeeJson);
 		Document result = null;
 		String output = null;
 		MongoCollection<Document> coll = getEmployeeCollection();
+		Document current = Document.parse(employeeJson);
+		String email_id = current.getString("email");
 		if (email_id != null) {
 			result = coll.find(eq("email", email_id)).first();
 		}
 		if (result != null ) {
-			coll.updateOne(eq("email", email_id), Document.parse(employeeJson));
-			output = "Created";
-		} else {
-			coll.insertOne(Document.parse(employeeJson));
+			coll.updateOne(eq("email", email_id), new Document("$set", current));
 			output = "Updated";
+		} else {
+			coll.insertOne(current);
+			output = "Created";
 		}
 		System.out.println("addEmployee:output:" + output);
 		return output;

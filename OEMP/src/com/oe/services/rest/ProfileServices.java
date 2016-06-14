@@ -19,8 +19,9 @@ public class ProfileServices {
 	@GET	
 	@Produces(MediaType.APPLICATION_JSON)
 	public String findEmployee(
-			@QueryParam("emp_id") String employeeId,
-			@QueryParam("email") String emailId) {
+			@QueryParam("emp_Id") String employeeId,
+			@QueryParam("emailId") String emailId) {
+		System.out.println("findEmployee:emp_Id:" + employeeId + ":emailId:" + emailId);
 		String result = DBServices.findEmployee(employeeId, emailId);
 		return result;
 	}
@@ -30,9 +31,10 @@ public class ProfileServices {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addEmployee(
-			@FormParam("employeeJson") String employeeJson,
-			@FormParam("email") String emailId) {
-		String result = DBServices.addEmployee(employeeJson, emailId);
+			String employeeJson
+			) {
+		System.out.println("findEmployee:employeeJson:" + employeeJson);
+		String result = DBServices.addEmployee(employeeJson);
 		return result;
 	}
 }
