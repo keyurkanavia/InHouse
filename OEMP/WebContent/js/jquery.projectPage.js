@@ -1,8 +1,83 @@
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
+var projJSON;
 function init(){
 	console.log("init");
-	populateTeam();
+	refreshPageContent(true);
+	console.log("projJSON from init" + projJSON);
 };
 
+function refreshPageContent(renderAll){
+	var proj_id = getUrlParameter('proj_id');
+	 var projectId = '';
+	    if (proj_id == '') {
+	    	alert("Project Id passed is empty");
+	    } else {
+	    	projectId = 'proj_Id=' + proj_id;
+	    }
+	var hr = new XMLHttpRequest();
+    hr.open("GET", "/oemp/rest/project/getProjectData?"+projectId, true);
+    hr.setRequestHeader("Content-type", "application/json",true);
+    hr.send(projectId);
+   
+    hr.onreadystatechange = function() {
+        if(hr.readyState == 4 && hr.status == 200) {
+        	 var data = JSON.parse(hr.responseText);
+        	 projJSON = data;
+        	 populateDescription();
+        	 
+        	 if(renderAll == true){
+        		populatePosts();
+        	 	populateTeam();
+        	 }
+        }
+    };
+}
+
+function populatePosts(){
+	var posts = projJSON.posts;
+	console.log(projJSON);
+	for(i=0;i<posts.length;i++){
+		console.log("posts items",posts[i].text);
+		addComment(posts[i].text);
+	}
+}
+
+function populateDescription(){
+	console.log("projJSON" + projJSON); 	
+	$("#description").empty();
+	    $("#description").append(projJSON.proj_desc);
+}
+
+
+function updateDescription() {
+	var projId =  getUrlParameter('proj_id');
+    $.ajax({
+        url: "/oemp/rest/project/updateProjDesc",
+        async : false,
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({name:projId,proj_id:projId,proj_desc:$("#descEditable").val()}),
+    });
+    console.log("Before:populateDescription called after updating");
+    populateDescription(projId);
+    console.log("After:populateDescription called after updating");
+    $('#editDescModal').css('display','none');
+    refreshPageContent(false);
+}
 
 function populateTeam(){
 	console.log("populateTeam");
@@ -93,10 +168,10 @@ $(".act").click(function(){
     var val = $(this).text();
 
 if (val == "More") {
-    $("#content").css('height', 'auto');
+    $("#description").css('height', 'auto');
     $(this).text("Less");
 } else {
-    $("#content").css('height', '30em');
+    $("#description").css('height', '20em');
     $(this).text("More");
 }
     return false;
@@ -106,14 +181,12 @@ var shifted = false;
 $("#comment").keypress(function(e) {
        var ev = e || window.event;
        var key = ev.keyCode || ev.which;
-       //do stuff with "key" here...
 	    var new_div = $('<div/>');
        new_div.hide();
        new_div.css('color', 'darkgreen');
 	   
 	   if(key=='13' && shifted == false){
 			var text = $('#comment').val();	
-			//new_div.html('key code ' + key + 'Enter was pressed!'+ text+'Space');
 			var testText = text.replace('\n', ' ');
 			var eachLine = testText.trim();
 			if(eachLine != ''){
@@ -144,17 +217,17 @@ $(document).keyup(function (e) {
 function addComment(commentText){
 	//alert("text = " + commentText);
 	var new_comment = $('#mainAreaItem').clone();
-	new_comment.find('#content').empty();
-	new_comment.find('#content').append(commentText);
+	new_comment.find('#description').empty();
+	new_comment.find('#description').append(commentText);
 	new_comment.find('.act').remove();
-	new_comment.find('#content').css('height', 'auto');
+	new_comment.find('#description').css('height', 'auto');
 	new_comment.prependTo('#dashboard');
 	
-	checkForURL(new_comment);
+	//checkForURL(new_comment);
 };
 
 function checkForURL(new_comment){
-	var $words = new_comment.find('#content').text().split(' ');
+	var $words = new_comment.find('#description').text().split(' ');
 	for (i in $words) {
     if ($words[i].indexOf('http://') == 0 || $words[i].indexOf('https://') == 0) {
 		var word = $words[i];
@@ -166,21 +239,21 @@ function checkForURL(new_comment){
         $words[i] = '<a href="' + word + '">' + $words[i] + '</a>';
     }
 }
-new_comment.find('#content').empty();
-new_comment.find('#content').append($words.join(' '));
+new_comment.find('#description').empty();
+new_comment.find('#description').append($words.join(' '));
 };
-
 
 $(document).ready(function() {
 // Get the modal
 var modal = $('#allTeamModal');
+var editDescModal = $('#editDescModal');
 
 // Get the button that opens the modal
 var btn = document.getElementById("allTeam");
-
+var editDescBtn = document.getElementById("editDesc");
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
-
+var editDescSpan = document.getElementsByClassName("close")[1];
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     
@@ -196,6 +269,20 @@ btn.onclick = function() {
 	//$( "#allTeamModal" ).dialog();
 }
 
+
+editDescBtn.onclick = function(){
+	var text = $('#description').text();
+	var textArea = $('#descEditable')
+	//textArea.setAttribute("id","descEditable");
+	//textArea.append(text);
+	textArea.val(text);
+	editDescModal.css('display', 'block');
+}
+
+editDescSpan.onclick = function(){
+	editDescModal.css('display','none');
+}
+
 // When the user clicks on <span> (x), close the modal
 span.onclick = function() {
     modal.css('display','none');
@@ -206,5 +293,9 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.css('display','none');
     }
+    if( event.target == editDescModal){
+    	editDescModal.css('display','none');
+    }
 }
+
 })

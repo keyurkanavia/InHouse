@@ -1,25 +1,20 @@
-body {
-	font-family: 'Lucida Grande', 'Helvetica Neue', sans-serif;
-	font-size: 13px;
-}
+html{
+font-size: 100%;
+} 
 
+body{
+   font-size:1em;
+}
 #projHeader{
 	width:100%;
 	background-color : #F7941E;
+	position:relative;
 }
 
 header {
     background-color:black;
     color:white;
     text-align:center;
-    padding:5px; 
-}
-nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
     padding:5px; 
 }
 section {
@@ -34,9 +29,10 @@ footer {
 }
 
 #banner {
-    width: 80%;
+    width: 20em;
     height: 10%;
 	padding-left: 10%;
+	position:relative;
 }
 
 #logo {
@@ -53,12 +49,16 @@ footer {
 }
 
 #description{
-	padding:10px;
-	border: 3px solid #ffff99;
-	border-radius: 18px;
+height: 15em;    
+    overflow: hidden; 18px;
 }
+
+#editDesc{
+	float:right;
+}
+
 #mainArea{
-	width:60%;	
+	width:55em;	
 	display:inline-block;
 }
 #mainAreaItem, #defaultPost{
@@ -68,35 +68,43 @@ footer {
 	padding:10px;
 	overflow:hidden;
 }
+
 #content{
 height: 30em;    
     overflow: hidden;
 }
 #team{
-	width: 30%;
-	height: 50em;
+	width: 30em;
+	height: 40em;
 	padding:10px;
 	box-shadow: 5px 5px 5px 5px #888888;
 	background-color : #ffffff;
 	display:inline-block;
-	margin-left:100px;
+	margin-left:5em;
 	overflow:hidden;
 }
-
 #member{
-	padding:20px;
+	width : 10em;
+	height : 8em;
+	 padding-top: 0.1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
 }
 #projMid{
+	width:90em;
     background-color: #64ace8;
 	display:flex;		
     align-items:flex-start;
+    margin:1.5em auto;
+    padding : 4em;
 }
 
 .act{
 	padding-left: 50%;
 }
 
-#comment_form,#projMid{
+#comment_form{
     padding-top: 50px;
     padding-right: 30px;
     padding-bottom: 50px;
@@ -178,7 +186,7 @@ background-color: transparent;
 }
 
 /* The Close Button */
-.close {
+.close{
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -199,4 +207,8 @@ h1::after{
 	border-style:solid solid none;
 	border-width:1px 1px medium;
 	width:100%;
+}
+#descEditable{
+	width :100%;
+	height :30em;
 }
