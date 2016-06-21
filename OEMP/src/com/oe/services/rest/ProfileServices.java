@@ -32,9 +32,12 @@ public class ProfileServices {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String addEmployee(
 			String employeeJson
-			) {
+			) throws Exception {
 		System.out.println("findEmployee:employeeJson:" + employeeJson);
 		String result = DBServices.addEmployee(employeeJson);
 		return result;
 	}
-}
+	
+	}
+
+

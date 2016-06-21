@@ -1,10 +1,17 @@
 package com.oe.services.db;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.bson.Document;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.MongoClientURI;
@@ -22,7 +29,7 @@ public class DBServices {
 
 	public static void main (String [] args) {
 		MongoClientURI mcUri = new MongoClientURI(
-				"mongodb://LPT0042.objectedge.com:27017",
+				"mongodb://oeis-d33.objectedge.com:27017",
 				MongoClientOptions.builder().cursorFinalizerEnabled(false));
 		MongoClient client = new MongoClient(mcUri);
 		MongoDatabase database = client.getDatabase("test");
@@ -35,7 +42,7 @@ public class DBServices {
 	
 	public static MongoDatabase getSourceDB() {
 		MongoClientURI mcUri = new MongoClientURI(
-				"mongodb://LPT0042.objectedge.com:27017",
+				"mongodb://oeis-d33.objectedge.com:27017",
 				MongoClientOptions.builder().cursorFinalizerEnabled(false));
 		MongoClient client = new MongoClient(mcUri);
 		MongoDatabase database = client.getDatabase("test");
@@ -75,7 +82,7 @@ public class DBServices {
 		return output;
 	}
 	
-	public static String addEmployee(String employeeJson) {
+	public static String addEmployee(String employeeJson) throws Exception {
 		System.out.println("addEmployee: employeeJson:"+employeeJson);
 		Document result = null;
 		String output = null;
@@ -89,6 +96,8 @@ public class DBServices {
 			coll.updateOne(eq("email", email_id), new Document("$set", current));
 			output = "Updated";
 		} else {
+			current.put("_id",ProfileUpdate.getNextId("user_id","employees"));
+			
 			coll.insertOne(current);
 			output = "Created";
 		}
@@ -105,5 +114,42 @@ public class DBServices {
 		}
 		return jsonArray;
 	}
+	
+	public static MongoCollection<Document> getProfileCollection() {
+		
+		MongoDatabase db = getSourceDB();
+		System.out.println("Connected to DB");
+		MongoCollection<Document> coll = db.getCollection("profile");
+		if (coll == null) {
+			throw new RuntimeException("mongo db connect error");
+		}
+		System.out.println("Connected to Profile collection");
+		return coll;
+	}
 
+		
+	public static String addUpdateProfile(String profileJson) {
+		System.out.println("addUpdateProfile: profileJson:"+profileJson);
+		Document result = null;
+		String output = null;
+		MongoCollection<Document> coll = getProfileUpdateCollection();
+		Document current = Document.parse(profileJson);
+		current.put("_id","PU"+ProfileUpdate.getNextId("proupdateid","profile_update"));
+		coll.insertOne(current);
+		output = "Created update Profile";
+		return profileJson;
+	}
+	
+	public static MongoCollection<Document> getProfileUpdateCollection() {
+		
+		MongoDatabase db = getSourceDB();
+		System.out.println("Connected to DB");
+		MongoCollection<Document> coll = db.getCollection("profile_update");
+		if (coll == null) {
+			throw new RuntimeException("mongo db connect error");
+		}
+		System.out.println("Connected to Profile collection");
+		return coll;
+	}
+	
 }

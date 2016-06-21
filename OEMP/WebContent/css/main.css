@@ -143,3 +143,44 @@ h1{
 	padding-top: 20px;
 	border-top: 2px solid #999999;
 }
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+}
+.navbar .navbar-collapse {
+    text-align: center;
+}
+.logo
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 25px;
+}
+.menu li
+{
+	font-family: "Times New Roman", Times, serif;
+	font-size: 20px;
+}
+.border_profile {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+    border-spacing: 10px 10px;
+}
+.border {
+    border-radius: 25px;
+    border: 2px solid #73AD21;
+}
+.side_border
+{
+	
+	width: 195px;
+    height: 297px;    
+}
+.profile
+{
+	text-align: center;
+}
+.update_heading
+{
+	text-align: left;
+}
+
