@@ -126,19 +126,6 @@ public class DBServices {
 		System.out.println("Connected to Profile collection");
 		return coll;
 	}
-
-		
-	public static String addUpdateProfile(String profileJson) {
-		System.out.println("addUpdateProfile: profileJson:"+profileJson);
-		Document result = null;
-		String output = null;
-		MongoCollection<Document> coll = getProfileUpdateCollection();
-		Document current = Document.parse(profileJson);
-		current.put("_id","PU"+ProfileUpdate.getNextId("proupdateid","profile_update"));
-		coll.insertOne(current);
-		output = "Created update Profile";
-		return profileJson;
-	}
 	
 	public static MongoCollection<Document> getProfileUpdateCollection() {
 		
