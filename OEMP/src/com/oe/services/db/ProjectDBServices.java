@@ -17,24 +17,15 @@ import com.mongodb.client.MongoDatabase;
  */
 
 public class ProjectDBServices extends DBServices{
-
-
-	public static MongoCollection<Document> getProjectsCollection() {
 	
-		MongoDatabase db = getSourceDB();
-		System.out.println("Connected to DB");
-		MongoCollection<Document> coll = db.getCollection("projects");
-		if (coll == null) {
-			throw new RuntimeException("mongo db connect error");
-		}
-		System.out.println("Connected to projects collection");
-		return coll;
+	public static MongoCollection<Document> projectColl;
+	
+	static{
+		projectColl = getCollection("projects");
 	}
-
-
+	
 	public static List<String> findAllProjects() {
-		MongoCollection<Document> coll = getProjectsCollection();
-		List<Document> foundDocument = coll.find().into(new ArrayList<Document>());
+		List<Document> foundDocument = projectColl.find().into(new ArrayList<Document>());
 		List<String> jsonArray = new ArrayList<String>();
 		for (Document document : foundDocument) {
 			jsonArray.add(document.toJson());
@@ -46,9 +37,8 @@ public class ProjectDBServices extends DBServices{
 		System.out.println("getProjectData: project_id:"+projectId);
 		Document result = null;
 		String output = null;
-		MongoCollection<Document> coll = getProjectsCollection();
 		if (projectId != null) {
-			result = coll.find(eq("proj_id", projectId)).first();
+			result = projectColl.find(eq("proj_id", projectId)).first();
 		}
 		if(result == null) {
 			output = "{project : Not Found}";
@@ -61,17 +51,16 @@ public class ProjectDBServices extends DBServices{
 	}
 
 	public static String updateProjDesc(String projectJson) {
-		System.out.println("addEmployee: projectJson:"+projectJson);
+		System.out.println("update Project : projectJson:"+projectJson);
 		Document result = null;
 		String output = null;
-		MongoCollection<Document> coll = getProjectsCollection();
 		Document current = Document.parse(projectJson);
 		String proj_id = current.getString("proj_id");
 		if (proj_id != null) {
-			result = coll.find(eq("proj_id", proj_id)).first();
+			result = projectColl.find(eq("proj_id", proj_id)).first();
 		}
 		if (result != null ) {
-			coll.updateOne(eq("proj_id", proj_id), new Document("$set", current));
+			projectColl.updateOne(eq("proj_id", proj_id), new Document("$set", current));
 			output = "Updated";
 		}
 		System.out.println("updated Project Description:output:" + output);

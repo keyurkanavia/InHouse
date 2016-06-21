@@ -27,9 +27,11 @@ import static com.mongodb.client.model.Filters.*;
  */
 public class DBServices {
 
+	private static final String connectionURL = "mongodb://oeis-d42.objectedge.com:27017";
+	
 	public static void main (String [] args) {
 		MongoClientURI mcUri = new MongoClientURI(
-				"mongodb://oeis-d33.objectedge.com:27017",
+				connectionURL,
 				MongoClientOptions.builder().cursorFinalizerEnabled(false));
 		MongoClient client = new MongoClient(mcUri);
 		MongoDatabase database = client.getDatabase("test");
@@ -42,22 +44,22 @@ public class DBServices {
 	
 	public static MongoDatabase getSourceDB() {
 		MongoClientURI mcUri = new MongoClientURI(
-				"mongodb://oeis-d33.objectedge.com:27017",
+				connectionURL,
 				MongoClientOptions.builder().cursorFinalizerEnabled(false));
 		MongoClient client = new MongoClient(mcUri);
 		MongoDatabase database = client.getDatabase("test");
 		return database;
 	}
 
-	public static MongoCollection<Document> getEmployeeCollection() {
+	public static MongoCollection<Document> getCollection(String collectionName) {
 	
 		MongoDatabase db = getSourceDB();
 		System.out.println("Connected to DB");
-		MongoCollection<Document> coll = db.getCollection("employees");
+		MongoCollection<Document> coll = db.getCollection(collectionName);
 		if (coll == null) {
 			throw new RuntimeException("mongo db connect error");
 		}
-		System.out.println("Connected to Employees collection");
+		System.out.println("Connected to "+collectionName+" collection");
 		return coll;
 	}
 	
@@ -65,7 +67,7 @@ public class DBServices {
 		System.out.println("findEmployee: emp_id:"+emp_id + ":email_id:" + email_id);
 		Document result = null;
 		String output = null;
-		MongoCollection<Document> coll = getEmployeeCollection();
+		MongoCollection<Document> coll = getCollection("employees");
 		if (email_id != null) {
 			result = coll.find(eq("email", email_id)).first();
 		}
@@ -86,7 +88,7 @@ public class DBServices {
 		System.out.println("addEmployee: employeeJson:"+employeeJson);
 		Document result = null;
 		String output = null;
-		MongoCollection<Document> coll = getEmployeeCollection();
+		MongoCollection<Document> coll =  getCollection("employees");
 		Document current = Document.parse(employeeJson);
 		String email_id = current.getString("email");
 		if (email_id != null) {
@@ -96,7 +98,7 @@ public class DBServices {
 			coll.updateOne(eq("email", email_id), new Document("$set", current));
 			output = "Updated";
 		} else {
-			current.put("_id",ProfileUpdate.getNextId("user_id","employees"));
+			current.put("_id",ProfileDBServices.getNextId("user_id","employees"));
 			
 			coll.insertOne(current);
 			output = "Created";
@@ -106,37 +108,13 @@ public class DBServices {
 	}
 
 	public static List<String> findAllEmployee() {
-		MongoCollection<Document> coll = getEmployeeCollection();
+		MongoCollection<Document> coll = getCollection("employees");
 		List<Document> foundDocument = coll.find().into(new ArrayList<Document>());
 		List<String> jsonArray = new ArrayList<String>();
 		for (Document document : foundDocument) {
 			jsonArray.add(document.toJson());
 		}
 		return jsonArray;
-	}
-	
-	public static MongoCollection<Document> getProfileCollection() {
-		
-		MongoDatabase db = getSourceDB();
-		System.out.println("Connected to DB");
-		MongoCollection<Document> coll = db.getCollection("profile");
-		if (coll == null) {
-			throw new RuntimeException("mongo db connect error");
-		}
-		System.out.println("Connected to Profile collection");
-		return coll;
-	}
-	
-	public static MongoCollection<Document> getProfileUpdateCollection() {
-		
-		MongoDatabase db = getSourceDB();
-		System.out.println("Connected to DB");
-		MongoCollection<Document> coll = db.getCollection("profile_update");
-		if (coll == null) {
-			throw new RuntimeException("mongo db connect error");
-		}
-		System.out.println("Connected to Profile collection");
-		return coll;
 	}
 	
 }

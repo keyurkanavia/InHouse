@@ -24,8 +24,16 @@ import com.mongodb.client.MongoCollection;
  * @author sachin.yadav
  *
  */
-public class ProfileUpdate {
+public class ProfileDBServices extends DBServices{
 	
+	public static MongoCollection<Document> profileColl;
+	public static MongoCollection<Document> profileUpdateColl;
+	
+	
+	static{
+		profileColl = getCollection("profile");
+		profileUpdateColl = getCollection("profile_update");
+	}
 	/*
 	 * Update User Profile
 	 */
@@ -34,13 +42,12 @@ public class ProfileUpdate {
 		System.out.println("profileUpdate: profileJson:"+profileJson);
 		Document result = null;
 		String output = null;
-		MongoCollection<Document> coll =DBServices.getProfileCollection();
 		Document current = Document.parse(profileJson);
 		String _id = current.getString("_id");
 		if (_id != null) {
-			result = coll.find(eq("_id", _id)).first();
+			result = profileColl.find(eq("_id", _id)).first();
 		}
-		listoFUpdatedColection=null;
+		listoFUpdatedColection.clear();
 		if (result != null ) {
 			if(!result.getString("fname").toString().equals(current.getString("fname").toString())){
 				updateProfileJsonDocument("fname",current,result);
@@ -58,7 +65,7 @@ public class ProfileUpdate {
 				document=null;
 			}
 				
-			coll.updateOne(eq("_id", _id), new Document("$set", current));
+			profileColl.updateOne(eq("_id", _id), new Document("$set", current));
 			output = "Updated";
 		} 
 		System.out.println("updateProfile:output:" + output);
@@ -84,10 +91,9 @@ public class ProfileUpdate {
 	public static String addUpdateProfile(String profileJson) {
 		System.out.println("addUpdateProfile: profileJson:"+profileJson);
 		String output = null;
-		MongoCollection<Document> coll = DBServices.getProfileUpdateCollection();
 		Document current = Document.parse(profileJson);
 		current.put("_id","PU"+getNextId("proupdateid","profile_update"));
-		coll.insertOne(current);
+		profileUpdateColl.insertOne(current);
 		output = "Created update Profile";
 		return profileJson;
 	}
@@ -96,9 +102,7 @@ public class ProfileUpdate {
 	 * Get All Update Profile Data
 	 */
 	public static List<String> getAllUpdateOfProfile() {
-		MongoCollection<Document> coll = DBServices.getProfileUpdateCollection();
-
-		List<Document> foundDocument = coll.find().into(new ArrayList<Document>());
+		List<Document> foundDocument = profileUpdateColl.find().into(new ArrayList<Document>());
 		List<String> jsonArray = new ArrayList<String>();
 		System.out.println(foundDocument.size());
 		foundDocument.remove(0);
@@ -116,9 +120,8 @@ public class ProfileUpdate {
 		System.out.println("findProfile:id:" + id);
 		Document result = null;
 		String output = null;
-		MongoCollection<Document> coll = DBServices.getProfileCollection();
 		if (id != null) {
-			result = coll.find(eq("_id", id)).first();
+			result = profileColl.find(eq("_id", id)).first();
 		}
 		if(result == null) {
 			output = "{name : Not Found}";
