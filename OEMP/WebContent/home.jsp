@@ -9,7 +9,7 @@
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<link rel="stylesheet" href="./css/main.css">
 	</head>
-		<%@ include file="./header.jsp" %>
+		<%@ include file="./inc/header.jsp" %>
 	<body>
 			<div class="container" style="width:800px">
 				<div class="profile border"   align="center">

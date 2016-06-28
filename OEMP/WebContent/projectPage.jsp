@@ -1,15 +1,13 @@
 <jsp>
-<html>
-
    <head>
       <title>OE Moodle</title>
 	  <link rel="stylesheet" type="text/css" href="css/style.css">
-	  <link rel="stylesheet" type="text/css" href="css/main.css" />
 <link rel="stylesheet" type="text/css" href="css/jquery.jqtimeline.css" />
+	<%@ include file="./inc/gl-html-head.jsp" %>
    </head>
 
    <body onload="init()">
-      <header>Moodle Header</header>
+     <jsp:include page="./inc/header.jsp" />
 	  <div id="container">
 	  <table id="projHeader">
 		<tr id="projBannerContainer"><td id="logoContainer"><img id="logo" src="images/mockImages/multiplusLogo.jpg"/></td>
@@ -52,7 +50,7 @@
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script type="text/javascript" src="js/jquery.jqtimeline.js"></script>
 		<script type = "text/javascript"  src = "js/jquery.projectPage.js"></script>
-		
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		
 		<!-- The Modal -->
 <div id="allTeamModal" class="modal">
@@ -75,6 +73,5 @@
 </div>
 </div>
    </body>
-</html>
 
 </jsp>
