@@ -53,7 +53,7 @@ public class ProjectServices {
 	}
 	
 	/**
-	 * 
+	 * This method inserts the new post added by the user. Thisis done my calling ProjectDBServices.postInsert method.
 	 * @param projectId
 	 * @return
 	 */
@@ -67,6 +67,19 @@ public class ProjectServices {
 		String result = null;
 		System.out.println("insert Project post:projectJson:" + projectJson);
 		result = ProjectDBServices.postInsert(projectJson);
+		return result;
+	}
+	
+	/**
+	 * The method in turn calls ProjectDBServices.getAllProjectList for fetching the list of project names JSON.
+	 * @return
+	 */
+	@Path("/getProjectList")
+	@GET	
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getProjectList(){
+		System.out.println("Get all Projects list");
+		String result= ProjectDBServices.getAllProjectList();
 		return result;
 	}
 	

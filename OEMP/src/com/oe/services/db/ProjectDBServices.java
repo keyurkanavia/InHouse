@@ -8,7 +8,9 @@ import java.util.List;
 import org.bson.Document;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.FindIterable;
 
 /**
  * Mongo DB connecter class to query/update project related items. This class extends DBServices.
@@ -92,6 +94,31 @@ public class ProjectDBServices extends DBServices{
 			output = "Updated";
 		}
 		System.out.println("updated Project Post:output:" + output);
+		return output;
+	}
+
+
+	public static String getAllProjectList() {
+		System.out.println("get all Project List");
+		Document result = null;
+		String output = null;
+		FindIterable<Document> iterable = projectColl.find();
+		final List<Document> projectNamesList = new ArrayList<Document>();
+		iterable.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+		        System.out.println(document);
+		        projectNamesList.add(new Document("name",document.get("proj_id")));
+		    }
+		});
+		result = new Document("names",projectNamesList);
+		if(result == null) {
+			output = "{project : Not Found}";
+		} else {
+			output = result.toJson();
+		}
+		 
+		System.out.println("getProjectData:result:" + output);
 		return output;
 	}
 }
