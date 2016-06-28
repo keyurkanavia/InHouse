@@ -35,10 +35,19 @@ $(document).ready(function(){
 				$(".dob").text("");
 				$(".dob").append("<input type='date'  name='dob1' value='"+dob+"' class='dob1'/>");
 				createInput("country1","country");
+				createInput("city1","city");
 				createInput("interest1","interest");
 				createInput("language1","language");
-				
-
+				createInput("high_degree1","high_degree");
+				createInput("College1","College");
+				createInput("Course1","Course");
+				createInput("doj1","doj");
+				createInput("skills1","skills");
+				createInput("curr_project1","curr_project");
+				createInput("curr_role1","curr_role");
+				createInput("pre_project1","pre_project");
+				createInput("pre_role1","pre_role");
+         		
 				$(".edit").hide();
 				$(".save").show();
 			});
@@ -58,7 +67,8 @@ $(document).ready(function(){
 				    hr.onreadystatechange = function() {
 				        if(hr.readyState == 4 && hr.status == 200) {
 				        	 var data = JSON.parse(hr.responseText);
-				        	    //alert ('data:'+ data);
+				        	    //alert ('data:'+ data);				        	 
+				        
 				   				$("._id").val(data._id);
 				        		$(".name").text(data.fname+" "+data.lname);
 				         		$(".fname").text(data.fname);
@@ -73,6 +83,15 @@ $(document).ready(function(){
 				         		$(".city").text(data.city);
 				         		$(".interest").text(data.interest);
 				         		$(".language").text(data.language);
+				         		$(".high_degree").text(data.high_degree);
+				         		$(".College").text(data.College);
+				         		$(".Course").text(data.Course);
+				         		$(".doj").text(data.doj);
+				         		$(".skills").text(data.skills);
+				         		$(".curr_project").text(data.curr_project);
+				         		$(".curr_role").text(data.curr_role);
+				         		$(".pre_project").text(data.pre_project);
+				         		$(".pre_role").text(data.pre_role);
 				         		
 				         		$(".edit").show();
 				        }
@@ -82,6 +101,7 @@ $(document).ready(function(){
 				function ajaxUpdateProfile() {
 				//	alert("Add called");
 					//alert($("._id").val());
+					//alert($(".gender1").val());
 				    $.ajax({
 				        url: "/oemp/rest/profileUpdate/updateProfile",
 				        type: 'post',
@@ -94,7 +114,22 @@ $(document).ready(function(){
 				        	email:$(".email1").val(),
 				        	cellphone:$(".cellphone1").val(),
 				        	skype_id:$(".skype_id1").val(),
-				        	gender:$(".gender1:checked").val()
+				        	gender:$(".gender1").val(),
+				        	dob:$(".dob1").val(),
+				        	country:$(".country1").val(),
+				        	city:$(".city1").val(),
+				        	interest:$(".interest1").val(),
+				        	language:$(".language1").val(),
+				        	high_degree:$(".high_degree1").val(),
+				        	College:$(".College1").val(),
+				        	Course:$(".Course1").val(),
+				        	doj:$(".doj1").val(),
+				        	skills:$(".skills1").val(),
+				        	curr_project:$(".curr_project1").val(),
+				        	curr_role:$(".curr_role1").val(),
+				        	pre_project:$(".pre_project1").val(),
+				        	pre_role:$(".pre_role").val()
+				        
 					}),
 					success : hideTextFieldAfterEdit()
 				    });
@@ -111,8 +146,18 @@ $(document).ready(function(){
 				hideTextField("skype_id1","skype_id");
 				hideTextField("dob1","dob");
 				hideTextField("country1","country");
+				hideTextField("city1","city");
 				hideTextField("interest1","interest");
 				hideTextField("language1","language");
+				hideTextField("high_degree1","high_degree");
+				hideTextField("College1","College");
+				hideTextField("Course1","Course");
+				hideTextField("doj1","doj");
+				hideTextField("skills1","skills");
+				hideTextField("curr_project1","curr_project");
+				hideTextField("curr_role1","curr_role");
+				hideTextField("pre_project1","pre_project");
+				hideTextField("pre_role1","pre_role");
 			}
 			function hideTextField(newclassName,oldClassName){
 				var classVal=$("."+newclassName).val();

@@ -10,18 +10,17 @@
 		<link rel="stylesheet" href="./css/main.css">
 	</head>
 		<%@ include file="./header.jsp" %>
-	<body>
+		<body>
 			<div class="container" style="width:800px">
-				<div class="profile border"   align="center">
-					<div class="profile_update" align="center"><h4>PROFILE UPDATES</h3><hr/></div>
-					<div class="more">
- 						<blockquote class="blockquote-reverse">
-  				 	 		<footer class="profile_more"><a href="#">View More</a></footer></div>
-  						</blockquote>
-					<div class="less">
-					<blockquote class='blockquote-reverse'><footer class='profile_less'><a href='#'>Less</a></footer></blockquote></div>
-				</div>
-			</div>		
+				<div class="profile border"   >
+					<div style="margin-left:-70px;margin-top:40px;">
+						<textarea rows="4" cols="80" name="post" id="post" placeholder="Share Some Technical Doc/videos/ppt...."></textarea></br></br>
+						<input type="submit" name="submit" value="POST"  style="margin-left:400px">
+					</div>
+					<hr>	
+			</div>	
+		</div>
+					
 	<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->

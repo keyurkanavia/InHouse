@@ -58,6 +58,62 @@ public class ProfileDBServices extends DBServices{
 			if(!result.getString("mname").toString().equals(current.getString("mname").toString())){
 				updateProfileJsonDocument("mname",current,result);
 			}
+			if(!result.getString("email").toString().equals(current.getString("email").toString())){
+				updateProfileJsonDocument("email",current,result);
+			}
+			if(!result.getString("cellphone").toString().equals(current.getString("cellphone").toString())){
+				updateProfileJsonDocument("cellphone",current,result);
+			}
+			if(!result.getString("skype_id").toString().equals(current.getString("skype_id").toString())){
+				updateProfileJsonDocument("skype_id",current,result);
+			}
+			if(!result.getString("gender").toString().equals(current.getString("gender").toString())){
+				updateProfileJsonDocument("gender",current,result);
+			}
+			if(!result.getString("dob").toString().equals(current.getString("dob").toString())){
+				updateProfileJsonDocument("dob",current,result);
+			}
+			if(!result.getString("country").toString().equals(current.getString("country").toString())){
+				updateProfileJsonDocument("country",current,result);
+			}
+			
+			if(!result.getString("city").toString().equals(current.getString("city").toString())){
+				updateProfileJsonDocument("city",current,result);
+			}
+			if(!result.getString("interest").toString().equals(current.getString("interest").toString())){
+				updateProfileJsonDocument("interest",current,result);
+			}
+			if(!result.getString("language").toString().equals(current.getString("language").toString())){
+				updateProfileJsonDocument("language",current,result);
+			}
+			if(!result.getString("high_degree").toString().equals(current.getString("high_degree").toString())){
+				updateProfileJsonDocument("high_degree",current,result);
+			}
+			if(!result.getString("College").toString().equals(current.getString("College").toString())){
+				updateProfileJsonDocument("College",current,result);
+			}
+			if(!result.getString("Course").toString().equals(current.getString("Course").toString())){
+				updateProfileJsonDocument("Course",current,result);
+			}
+			if(!result.getString("doj").toString().equals(current.getString("doj").toString())){
+				updateProfileJsonDocument("doj",current,result);
+			}
+			if(!result.getString("skills").toString().equals(current.getString("skills").toString())){
+				updateProfileJsonDocument("skills",current,result);
+			}
+			if(!result.getString("curr_project").toString().equals(current.getString("curr_project").toString())){
+				updateProfileJsonDocument("curr_project",current,result);
+			}
+			if(!result.getString("curr_role").toString().equals(current.getString("curr_role").toString())){
+				updateProfileJsonDocument("curr_role",current,result);
+			}
+			if(!result.getString("pre_project").toString().equals(current.getString("pre_project").toString())){
+				updateProfileJsonDocument("pre_project",current,result);
+			}
+			if(!result.getString("pre_role").toString().equals(current.getString("pre_role").toString())){
+				updateProfileJsonDocument("pre_role",current,result);
+			}
+			
 			BasicDBObject document=new BasicDBObject();
 			for(int i=0;i<listoFUpdatedColection.size();i++){
 				document =listoFUpdatedColection.get(i);
