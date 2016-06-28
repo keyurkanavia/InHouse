@@ -79,6 +79,21 @@ function updateDescription() {
     refreshPageContent(false);
 }
 
+function updatePostToMongoDB(postText) {
+	var projId =  getUrlParameter('proj_id');
+	var userId = getUrlParameter('user_id');
+    
+	console.log("Before:updatePostToMongoDB called.");
+	$.ajax({
+        url: "/oemp/rest/project/postInsert",
+        type: 'post',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({name:projId,proj_id:projId,posts:[{user:userId,text:postText}]}),
+    });
+	console.log("After:updatePostToMongoDB called.");
+}
+
 function populateTeam(){
 	console.log("populateTeam");
 	var members = new Array('images/mockImages/darth-vader1_opt.jpg','images/mockImages/character1_opt.jpg','images/mockImages/darth-vader1_opt.jpg','images/mockImages/character1_opt.jpg','images/mockImages/darth-vader1_opt.jpg','images/mockImages/character1_opt.jpg','images/mockImages/character1_opt.jpg');
@@ -190,6 +205,7 @@ $("#comment").keypress(function(e) {
 			var testText = text.replace('\n', ' ');
 			var eachLine = testText.trim();
 			if(eachLine != ''){
+				updatePostToMongoDB(text);
 				addComment(text);
 				$('#comment').val('');
 			}

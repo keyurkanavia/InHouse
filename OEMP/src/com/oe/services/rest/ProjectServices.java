@@ -47,8 +47,26 @@ public class ProjectServices {
 			String projectJson
 			) {
 		String result = null;
-		System.out.println("findEmployee:projectJson:" + projectJson);
+		System.out.println("updateProjectDesc:projectJson:" + projectJson);
 		result = ProjectDBServices.updateProjDesc(projectJson);
+		return result;
+	}
+	
+	/**
+	 * 
+	 * @param projectId
+	 * @return
+	 */
+	@Path("/postInsert")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String postInsert(
+			String projectJson
+			) {
+		String result = null;
+		System.out.println("insert Project post:projectJson:" + projectJson);
+		result = ProjectDBServices.postInsert(projectJson);
 		return result;
 	}
 	
