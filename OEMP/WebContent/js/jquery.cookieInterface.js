@@ -21,32 +21,40 @@ function getCookie(cname) {
     return "";
 }
 
+
 var getUrlParameter = function getUrlParameter(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;
 
-    for (i = 0; i < sURLVariables.length; i++) {
-        sParameterName = sURLVariables[i].split('=');
-
-        if (sParameterName[0] === sParam) {
-            return sParameterName[1] === undefined ? true : sParameterName[1];
-        }
+    if (sPageURL != ''){
+    	for (i = 0; i < sURLVariables.length; i++) {
+    		sParameterName = sURLVariables[i].split('=');
+    		
+    		if (sParameterName[0] === sParam) {
+    			return sParameterName[1] === undefined ? true : sParameterName[1];
+    		}
+    	}
+    }else{
+    	return null;
     }
 };
 
 
-function checkCookie() {
-    var user=getCookie("username");
-    if(user != ""){
+function checkUserCookie() {
+    var user=getCookie('username');
+    var usrFromURL = getUrlParameter('user_id');
+    if(usrFromURL != '' && usrFromURL != null){
+    	setCookie("username", usrFromURL, 30);
+    	return usrFromURL;
+    }else if (user != "") {
         alert("Welcome again " + user);
         return user;
     } else {
        user = prompt("Please enter your name:","");
        if (user != "" && user != null) {
            setCookie("username", user, 30);
-           return user;
        }
     }
 }
