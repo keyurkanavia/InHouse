@@ -134,15 +134,6 @@ h1{
 .button-github:hover{
 	background-position: 0px -135px;
 }
-
-
-.footer{
-	background-color: #cccccc;
-	min-height: 50px;
-	margin-top: 20px;
-	padding-top: 20px;
-	border-top: 2px solid #999999;
-}
 .navbar .navbar-nav {
     display: inline-block;
     float: none;

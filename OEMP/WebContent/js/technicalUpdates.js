@@ -35,11 +35,13 @@ function addComment(id){
 			dataType: 'json',
 		    contentType: 'application/json',
 		    data: JSON.stringify({id:id,addComment:$(".addComment"+id+"").val(),name:"sachin"}),
-		    success:afterPost()
+		    success:afterComment()
 		 });
 	 	}
 }	 
-
+function afterComment(){
+	
+}
 function afterPost(){
 	$(".post").val("");
 	getAlltechnologyUpdates();

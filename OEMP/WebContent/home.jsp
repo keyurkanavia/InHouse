@@ -4,12 +4,9 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewpoint" content="width=device-width, initial-scale=1.0"/>
-		<title>OE PORTAL HOME</title>
-		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-		<link rel="stylesheet" href="./css/main.css">
+		<jsp:include page="./inc/gl-html-head.jsp" />
 	</head>
-		<%@ include file="./inc/header.jsp" %>
+		<jsp:include page="./inc/header.jsp" />
 	<body>
 			<div class="container" style="width:800px">
 				<div class="profile border"   align="center">
@@ -30,12 +27,10 @@
 					<div class="less">
 					<blockquote class='blockquote-reverse'><footer class='tech_less'><a href='#'>Less</a></footer></blockquote></div>
 				</div>
-			</div>		
-	<!-- jQuery library -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-		<!-- Latest compiled JavaScript -->
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+			</div>
+			<jsp:include page="./inc/footer.jsp" />
 		<script src="./js/home.js"></script>
 	</body>
+	
 </html>
 </jsp>
