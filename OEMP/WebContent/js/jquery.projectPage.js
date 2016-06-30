@@ -105,6 +105,7 @@ function populateTeam(){
 		
 		image.setAttribute("src",members[i]);
 		image.setAttribute("id","member");
+		image.setAttribute("class","profile_img");
 		aLink.setAttribute("id","member"+i)
 		aLink.setAttribute("href","http://www.google.com");
 		aLink.appendChild(image);
@@ -186,7 +187,7 @@ if (val == "More") {
     $("#description").css('height', 'auto');
     $(this).text("Less");
 } else {
-    $("#description").css('height', '20em');
+    $("#description").css('height', '10em');
     $(this).text("More");
 }
     return false;

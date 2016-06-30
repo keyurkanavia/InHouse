@@ -83,4 +83,17 @@ public class ProjectServices {
 		return result;
 	}
 	
+	/**
+	 * The method in turn calls ProjectDBServices.createNewProj to create new project.
+	 * @return
+	 */
+	@Path("/createNewProj")
+	@POST	
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String createNewProj(String projectJson){
+		System.out.println("Create new Project");
+		String result= ProjectDBServices.createNewProj(projectJson);
+		return result;
+	}
 }

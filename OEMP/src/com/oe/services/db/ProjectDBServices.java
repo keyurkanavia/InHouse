@@ -121,4 +121,25 @@ public class ProjectDBServices extends DBServices{
 		System.out.println("getProjectData:result:" + output);
 		return output;
 	}
+
+	public static String createNewProj(String projectJson) {
+		System.out.println("New Project : projectJson:"+projectJson);
+		Document result = null;
+		String output = null;
+		Document current = Document.parse(projectJson);
+		String name = current.getString("name");
+		if (name != null) {
+			result = projectColl.find(eq("proj_id", name)).first();
+		}
+		if (result != null ) {
+			projectColl.updateOne(eq("proj_id", name), new Document("$set", current));
+			output = "Updated";
+		} else {			
+			projectColl.insertOne(current);
+			output = "Created";
+		}
+		System.out.println("new Project:output:" + output);
+		return output;
+	}
+
 }
