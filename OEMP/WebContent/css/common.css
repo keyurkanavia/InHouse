@@ -1,6 +1,11 @@
-
+html{
+	font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+}
 #contMid{
 	width:70em;
+	height:100%;
     background-color: #64ace8;
 	display:flex;		
     align-items:flex-center;
@@ -14,7 +19,9 @@
 }
 
 #mainAreaItem{
-	margin-top:50px;
+	margin-top:1em;
+	margin-left:2em;
+	margin-bottom:1em;
 	background-color : #ffffff;
 	box-shadow: 5px 5px 5px 5px #888888;
 	padding:10px;

@@ -1,14 +1,15 @@
 <jsp>
 	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewpoint" content="width=device-width, initial-scale=1.0"/>
 		<%@ include file="./inc/gl-html-head.jsp" %>
 	</head>
 		<%@ include file="./inc/header.jsp" %>
 		<body>
-			<div class="container" style="width:800px">
+			<div id="contMid" >
+			<div id="mainArea">
+			<div id="mainAreaItem" >
+			<div class="container" style="width:40em">
 				<div>
-					<div style="margin-left:-70px;margin-top:40px;">
+					<div>
 						<div class="action-line to-open">
 	<form class="form-horizontal" name="addProjForm" id="addProjForm" action="/oemp/rest/project/createNewProj">
   <fieldset>
@@ -54,6 +55,7 @@
         <br>
        		<ul id="targetList" class="list-group " style='height:200px;max-height: 200px;overflow-y:scroll;' ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
       </div>
+      <span class="help-block" >Drag and drop the members in the left area to sleect them.</span>
     </div>
     
     
@@ -69,7 +71,10 @@
 					<hr>	
 			</div>	
 		</div>
-		
+		</div>
+		</div>
+		</div>
+		<jsp:include page="./inc/footer.jsp" />
 		<script type = "text/javascript"  src = "js/jquery.createProject.js"></script>
 	</body>
 </jsp>

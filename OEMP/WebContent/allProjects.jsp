@@ -1,4 +1,3 @@
-<jsp>
 <html>
 	<head>
 		<meta charset="utf-8"/>
@@ -7,8 +6,11 @@
 	</head>
 		<%@ include file="./inc/header.jsp" %>
 		<body>
-			<div class="container" style="width:800px">
-				<div class="profile border"   >
+		<div  id="contMid">
+		<div id="mainArea">
+				<div id="mainAreaItem">
+			<div style="width:800px">
+				<div class="profile"   >
 					<div style="margin-left:-70px;margin-top:40px;">
 						<div class="action-line to-open">
 							<span>All Projects</span>
@@ -19,7 +21,10 @@
 					<hr>	
 			</div>	
 		</div>
+		</div>
+		</div>
+		</div>
+		<jsp:include page="./inc/footer.jsp" />
 		<script type = "text/javascript"  src = "./js/jquery.allProjects.js"></script>
 	</body>
 </html>
-</jsp>
