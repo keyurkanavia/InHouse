@@ -1,0 +1,94 @@
+/**
+User Profile Collection
+
+**/
+
+
+db.createCollection("profile")
+db.profile_update.insert({
+      _id: "profileId",
+      seq: 1
+   })
+db.profile.insert({
+        "_id" : "PR2",
+        "fname" : "prasad",
+        "mname" : "p",
+        "lname" : "wadekar",
+        "email" : "pw@gmail.com",
+        "cellphone" : "123456789",
+        "skype_id" : "prasad.wadekar",
+        "gender" : "male",
+        "dob" : "",
+        "country" : "india",
+        "city" : "mumbai",
+        "interest" : "cricket,football",
+        "language" : "english,hindi,marathi",
+        "high_degree" : "BSC",
+        "College" : "DNY",
+        "doj" : "1 sept 2014",
+        "skills" : "",
+        "curr_project" : "Multiplus",
+        "curr_role" : "",
+        "pre_project" : "Chemmart",
+        "pre_role" : "",
+        "Course" : "CDAC"
+})
+
+/**
+User Profile Update Collection
+
+**/
+
+
+
+db.createCollection("profile_update")
+db.profile_update.insert({
+      _id: "proupdateid",
+      seq: 1
+   })
+db.profile_update.insert({
+"_id":"4",
+"fname":"sachin",
+"lname":"yadav",
+"updateType":"skype_id",
+"preValue":"sachin",
+"newValue":"itsmesachin",
+"date":"Mar 10 2012 10:00:00 AM"
+})
+
+/**
+Technology  Collection
+
+**/
+
+
+db.createCollection("technology")
+db.technology.insert({
+      _id: "techid",
+      seq: 1
+   })
+   
+db.profile_update.insert({
+        "_id" : "TU14",
+        "technologyUpdate" : "ATG 11.2 release Documents",
+        "date" : "Jun 30 2016 10:48:10 AM",
+        "comments" : [
+                {
+                        "name" : "sachin",
+                        "addComment" : "Can you share the document URL ",
+                        "date" : "Jun 30 2016 11:39:35 AM"
+                },
+                {
+                        "name" : "sachin",
+                        "addComment" : "Sure",
+                        "date" : "Jun 30 2016 11:41:10 AM"
+                },
+                {
+                        "name" : "sachin",
+                        "addComment" : "www.oracle.com/ATG11.2/docs",
+                        "date" : "Jun 30 2016 11:48:39 AM"
+                }
+        ]
+})
+
+
