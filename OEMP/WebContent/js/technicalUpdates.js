@@ -35,16 +35,19 @@ function addComment(id){
 			dataType: 'json',
 		    contentType: 'application/json',
 		    data: JSON.stringify({id:id,addComment:$(".addComment"+id+"").val(),name:"sachin"}),
-		    success:afterComment()
+		    success:afterComment(id)
 		 });
 	 	}
 }	 
-function afterComment(){
-	
+function afterComment(id){
+	$(".addComment"+id+"").val("");
+	alert("Added Comment please refresh the page");
+	$('.modal.in').modal('hide'); 
+	location.reload();
 }
 function afterPost(){
 	$(".post").val("");
-	getAlltechnologyUpdates();
+	location.reload();
 }
 function getAlltechnologyUpdates(){
 	$(".load_post").empty();

@@ -1,6 +1,4 @@
-body{
-	background-color: grey;
-}
+
 #contMid{
 	width:70em;
     background-color: #64ace8;
@@ -21,4 +19,7 @@ body{
 	box-shadow: 5px 5px 5px 5px #888888;
 	padding:10px;
 	overflow:hidden;
+}
+.footer{
+	background-color: #e7e7e7;
 }

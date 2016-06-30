@@ -8,8 +8,9 @@
 	</head>
 		<jsp:include page="./inc/header.jsp" />
 		<body>
-			<div class="container" style="width:800px">
-				<div class="profile border"   >
+		<div  id="contMid" class="container">
+			<div id="mainArea">
+				<div id="mainAreaItem" class="profile"   align="center">
 					<div style="margin-left:-70px;margin-top:40px;">
 						<textarea rows="4" cols="80" class="post" id="post" placeholder="Share Some Technical Doc/videos/ppt...."></textarea></br></br>
 						<input type="button" name="button" id="btn_post" value="POST"  style="margin-left:400px">
@@ -18,11 +19,9 @@
 					<div class="load_post">
 					
 					</div>	
-					
-				<div>
-				</div>	
+				</div>
 			</div>
-		</div>
+		</div>	
 			<jsp:include page="./inc/footer.jsp" />			
 	<!-- jQuery library -->
 

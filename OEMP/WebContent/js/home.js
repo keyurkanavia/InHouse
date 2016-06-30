@@ -158,7 +158,15 @@ $(document).ready(function(){
 					dataType: 'json',
 				    contentType: 'application/json',
 				    data: JSON.stringify({id:id,addComment:$(".addComment"+id+"").val(),name:"sachin"}),
-				    success:afterPost()
+				    success:afterComment(id)
 				 });
 			 	}
+		}
+		
+		function afterComment(id){
+			$(".addComment"+id+"").val("");
+			alert("Added Comment please refresh the page");
+			//getAlltechnologyUpdates();
+			$('.modal.in').modal('hide');
+			location.reload();
 		}
