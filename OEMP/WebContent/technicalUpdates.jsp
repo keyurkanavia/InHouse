@@ -14,18 +14,23 @@
 			<div class="container" style="width:800px">
 				<div class="profile border"   >
 					<div style="margin-left:-70px;margin-top:40px;">
-						<textarea rows="4" cols="80" name="post" id="post" placeholder="Share Some Technical Doc/videos/ppt...."></textarea></br></br>
-						<input type="submit" name="submit" value="POST"  style="margin-left:400px">
+						<textarea rows="4" cols="80" class="post" id="post" placeholder="Share Some Technical Doc/videos/ppt...."></textarea></br></br>
+						<input type="button" name="button" id="btn_post" value="POST"  style="margin-left:400px">
 					</div>
-					<hr>	
-			</div>	
-		</div>
+					<hr>
+					<div class="load_post">
+					
+					</div>	
+					
+				<div>
+				</div>	
+			</div>
 					
 	<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 		<!-- Latest compiled JavaScript -->
 		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-		<script src="./js/home.js"></script>
+			<script src="./js/technicalUpdates.js"></script>
 	</body>
 </html>
 </jsp>

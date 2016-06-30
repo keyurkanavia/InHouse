@@ -7,6 +7,7 @@
 		<title>Getting Started with BOOTSTRAP</title>
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="./css/main.css">
+		<%@ include file="./inc/gl-html-head.jsp" %>
 	</head>
 		<jsp:include page="./inc/header.jsp" />
 	<body>
