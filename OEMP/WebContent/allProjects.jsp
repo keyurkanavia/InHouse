@@ -11,7 +11,7 @@
 				<div class="profile border"   >
 					<div style="margin-left:-70px;margin-top:40px;">
 						<div class="action-line to-open">
-							<a><span>+</span> <span>All Projects</span></a>
+							<span>All Projects</span>
 							<ul id="projectList">
 							</ul>
 						</div>

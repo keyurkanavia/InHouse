@@ -1,0 +1,24 @@
+body{
+	background-color: grey;
+}
+#contMid{
+	width:70em;
+    background-color: #64ace8;
+	display:flex;		
+    align-items:flex-center;
+    margin:2em auto;
+    padding : 2em;
+    padding-left : 6em;
+}
+#mainArea{
+	width:55em;	
+	display:inline-block;
+}
+
+#mainAreaItem{
+	margin-top:50px;
+	background-color : #ffffff;
+	box-shadow: 5px 5px 5px 5px #888888;
+	padding:10px;
+	overflow:hidden;
+}
