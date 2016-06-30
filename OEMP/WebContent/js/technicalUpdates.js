@@ -67,14 +67,15 @@ function getAlltechnologyUpdates(){
    				return dateA < dateB ? 1 : -1;  
    			};
    			arr.sort(sortFunction);//sort the new javascript array 
-   			console.log(arr);	
-   			for(var i=0;i<arr.length;i++){
-				var div_data ="<div align='left' style='margin-left:50px'><li><b>"+arr[i].technologyUpdate.toUpperCase()+"</b></li></br><p data-toggle='modal' data-target='#"+arr[i].id+"'>Comment</p></div></br>" ;
-					 $(".load_post").append(div_data);
-					 if(arr[i].comments!='' || arr[i].comments!='undefined'){
-						 createModel(arr[i].id.toUpperCase(),arr[i].technologyUpdate.toUpperCase(),arr[i].comments);
-					 }
-				}
+   			console.log(arr);
+   		
+	   			for(var i=0;i<arr.length;i++){
+					var div_data ="<div align='left' style='margin-left:50px'><li><b>"+arr[i].technologyUpdate.toUpperCase()+"</b></li></br><p data-toggle='modal' data-target='#"+arr[i].id+"'>Comment</p></div></br>" ;
+						 $(".load_post").append(div_data);
+						 if(arr[i].comments!='' || arr[i].comments!='undefined'){
+							 createModel(arr[i].id.toUpperCase(),arr[i].technologyUpdate.toUpperCase(),arr[i].comments);
+						 }
+				}	
         }
     } 
 }
