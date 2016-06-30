@@ -13,7 +13,6 @@
 						<div class="action-line to-open">
 							<a><span>+</span> <span>All Projects</span></a>
 							<ul id="projectList">
-
 							</ul>
 						</div>
 					</div>

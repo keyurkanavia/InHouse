@@ -9,15 +9,15 @@
      <jsp:include page="./inc/header.jsp" />
 	  <div id="container">
 	  <table id="projHeader">
-		<tr id="projBannerContainer"><td id="logoContainer"><img id="logo" src="images/mockImages/multiplusLogo.jpg"/></td>
-									 <td id="banner"><img src="images/mockImages/multiplusheader.png"/></td>
+		<tr id="projBannerContainer"><td id="logoContainer"><img id="logo" src="http://placehold.it/350x150"/></td>
+									 <td id="banner"><img src="http://placehold.it/850x250"/></td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td colspan="2">
 			<hr/>
 				<div id="myTimeline"></div>
 			</td>
-		</tr></table>
+		</tr> --></table>
 		
 		<div id="projMid">
 		<div id="mainArea">

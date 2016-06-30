@@ -15,11 +15,10 @@
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav nav-pills menu">
 			 				    <li class="active"><a href="home.jsp">Home</a></li>
-			 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Project INFO<span class="caret"></span></a>
+			 					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Project<span class="caret"></span></a>
 			 					<ul class="dropdown-menu">
-         						 <li><a href="#">Page 1-1</a></li>
-         						 <li><a href="#">Page 1-2</a></li>
-          						<li><a href="#">Page 1-3</a></li>
+         						 <li><a href="createProject.jsp">Create New Project</a></li>
+         						 <li><a href="allProjects.jsp">All Projects</a></li>
         						</ul>
 			 					</li>
 			 					<li> <a href="technicalUpdates.jsp">Technology Updates</a></li>

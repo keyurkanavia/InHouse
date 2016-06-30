@@ -92,3 +92,6 @@ db.profile_update.insert({
 })
 
 
+//query to create projects collection:
+
+db.createCollection("projects")
