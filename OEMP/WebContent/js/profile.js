@@ -67,8 +67,7 @@ $(document).ready(function(){
 				    hr.onreadystatechange = function() {
 				        if(hr.readyState == 4 && hr.status == 200) {
 				        	 var data = JSON.parse(hr.responseText);
-				        	    //alert ('data:'+ data);				        	 
-				        
+				        	   // alert('data:'+ data.profile_img);				        	 
 				   				$("._id").val(data._id);
 				        		$(".name").text(data.fname+" "+data.lname);
 				         		$(".fname").text(data.fname);
@@ -92,6 +91,8 @@ $(document).ready(function(){
 				         		$(".curr_role").text(data.curr_role);
 				         		$(".pre_project").text(data.pre_project);
 				         		$(".pre_role").text(data.pre_role);
+				         		$(".profile_img").attr("src",data.profile_img);
+				         		
 				         		
 				         		$(".edit").show();
 				        }
