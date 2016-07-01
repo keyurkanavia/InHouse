@@ -20,8 +20,7 @@
 			<div style="margin-left:50px">
 		<input type="hidden" name="_id" class="_id"/>
 				<h4 style="font-family:courier"><b>Name:</b><b class="name"></b></h4>
-				<h4 style="font-family:courier"><b>Designation:</b><b class="desg"></b></h4>
-	            <img src="https://www.renault.co.uk/etc/designs/renault_v2/5.2.0-112/common-assets/img/avatar/avatar.png" alt= "place holder" width="154" height="200" align="left" class="profile_img"/>
+	            <img src="" alt= "place holder" width="154" height="200" align="left" class="profile_img"/>
 			</div>
 			<div style="margin-left:250px">
 					  <legend>Contact Information</legend>
