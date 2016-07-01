@@ -24,7 +24,7 @@
     <div class="form-group">
       <label for="textArea" class="col-lg-2 control-label">Description</label>
       <div class="col-lg-10">
-        <textarea class="form-control" rows="3" id="description"></textarea>
+        <textarea class="form-control" rows="3" id="description" placeholder="Description"></textarea>
         <span class="help-block" >A longer block of help text that breaks onto a new line and may extend beyond one line.</span>
       </div>
     </div>
@@ -34,34 +34,27 @@
       <div class="col-lg-5">
         <br>
        		<ul id="sourceList"class="list-group " style=' height:200px;max-height: 200px;overflow-y:scroll;' ondrop="drop(event)" ondragover="allowDrop(event)">
-  				<li id="dr1" class="list-group-item" draggable="true" ondragstart="drag(event)">
-   	 				<span class="badge">IND</span>Deepak Verma
-  				</li>
-  				<li id="dr2" class="list-group-item" draggable="true" ondragstart="drag(event)">
-    				<span class="badge">BR</span>Thiago Custodio
-  				</li>
-  				<li id="dr3" class="list-group-item" draggable="true" ondragstart="drag(event)">
-    				<span class="badge">BR</span>Gustavo Seganfredo
-  				</li>
-   				<li id="dr4" class="list-group-item" draggable="true" ondragstart="drag(event)">
-    				<span class="badge">IND</span>Satyajit De
-  				</li>
-   				<li id="dr5" class="list-group-item" draggable="true" ondragstart="drag(event)">
-    				<span class="badge">US</span>Bhargav Trivedi
-  				</li>
 			</ul>
       </div>
        <div class="col-lg-5">
         <br>
        		<ul id="targetList" class="list-group " style='height:200px;max-height: 200px;overflow-y:scroll;' ondrop="drop(event)" ondragover="allowDrop(event)"></ul>
       </div>
-      <span class="help-block" >Drag and drop the members in the left area to sleect them.</span>
+      <span class="help-block" >Drag and drop the members in the right area to select the team members.</span>
     </div>
     
     
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">
         <input type="button" class="btn btn-primary" name="submit" onclick="addProject();" value="Submit"/>
+      </div>
+    </div>
+        <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <div class="alert alert-success" role="alert" hidden>...</div>
+		<div class="alert alert-info" role="alert" hidden>...</div>
+		<div id="warning" class="alert alert-warning" role="alert" hidden></div>
+		<div id="danger" class="alert alert-danger" role="alert" hidden>...</div>
       </div>
     </div>
   </fieldset>

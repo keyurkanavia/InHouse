@@ -9,6 +9,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+
+import com.oe.services.db.DBServices;
 import com.oe.services.db.ProfileDBServices;
 /**
  * Rest API class using jax-rs for profile operations.
@@ -47,6 +49,15 @@ public class ProfileUpdateService {
 			@QueryParam("id") String id) {
 		System.out.println("findProfile:Id:" + id);
 		String result = ProfileDBServices.findProfile(id);
+		return result;
+	}
+	
+	@Path("/getAllProfiles")
+	@GET	
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getAllProfiles() {
+		System.out.println("Get All Profiles");
+		String result = ProfileDBServices.getAllProfiles();
 		return result;
 	}
 }

@@ -13,10 +13,12 @@ import java.util.List;
 import org.bson.Document;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 
 /**
@@ -221,5 +223,31 @@ public class ProfileDBServices extends DBServices{
 	      SimpleDateFormat ft = 
 	      new SimpleDateFormat ("MMM dd YYYY HH:mm:ss aaa");
 		return ft.format(dNow);
+	}
+	
+	/*
+	 * Method returns all the profiles
+	 */
+	public static String getAllProfiles(){
+		Document result = null;
+		String output = null;
+		FindIterable<Document> iterable = profileColl.find();
+		final List<Document> profileList = new ArrayList<Document>();
+		iterable.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+		        System.out.println(document);
+		        profileList.add(new Document("id",document.get("_id")).append("fname", document.get("fname")).append("lname", document.get("lname")).append("country", document.get("country")));
+		    }
+		});
+		result = new Document("profiles",profileList);
+		if(result == null) {
+			output = "{name : Not Found}";
+		} else {
+			output = result.toJson();
+		}
+		 
+		System.out.println("findProfile:result:" + output);
+		return output;
 	}
 }

@@ -9,7 +9,7 @@
 		<div  id="contMid">
 		<div id="mainArea">
 				<div id="mainAreaItem">
-			<div style="width:800px">
+			<div style="width:400px">
 				<div class="profile"   >
 					<div style="margin-left:-70px;margin-top:40px;">
 						<div class="action-line to-open">

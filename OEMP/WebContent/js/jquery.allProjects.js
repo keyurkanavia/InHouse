@@ -18,6 +18,7 @@ $(document).ready(function() {
 			linkItem.setAttribute("href","./projectPage.jsp?proj_id="+members[i].name+"&user_id="+userId);
 			linkItem.innerHTML=members[i].name;
 			listItem.appendChild(linkItem);
+			listItem.innerHTML=listItem.innerHTML+'<a href="#" style="float:right">delete</a>';
 			projList.appendChild(listItem);
 		}
 	}
