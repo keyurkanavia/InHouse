@@ -54,6 +54,7 @@ function insert(str, index, value) {
 function addProject() {
 		
 	if(checkValidation()){
+		var proj_author = checkUserCookie();
 		var projName =  $('#name').val();
 		var projDesc = document.getElementById('description').value;
 		
@@ -74,7 +75,7 @@ function addProject() {
 		console.log('team = '+team);
 		
 		alert("Description "+projDesc);
-		var dataVar =JSON.stringify({name:projName,proj_id:projName,proj_desc:projDesc,posts:[],team:[]});
+		var dataVar =JSON.stringify({name:projName,proj_id:projName,proj_desc:projDesc,lastModifiedDate:new Date(),lastMofifiedFields:[],author:proj_author,team:[]});
 		
 		var newData = insert(dataVar,dataVar.length-2,team)
 		console.log('NewData = '+newData);
@@ -89,6 +90,7 @@ function addProject() {
 	    });
 	}
 }
+
 function getCountryCode(country){
 	var countryCode;
 	switch(country.toLowerCase()) {
@@ -136,6 +138,13 @@ function populateFormFields(){
     };
 	
 }
+
+window.onload=function() {
+	  document.getElementById("form1").onsubmit=function() {
+	    window.location.replace("login.php");
+	    return false;
+	  }
+	}
 
 $(document).ready(function() {
 	 

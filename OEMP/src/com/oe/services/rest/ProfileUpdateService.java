@@ -60,4 +60,20 @@ public class ProfileUpdateService {
 		String result = ProfileDBServices.getAllProfiles();
 		return result;
 	}
+	
+	
+	
+
+	@Path("/getProfile")
+	@GET	
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getProfile(
+			@QueryParam("email") String emailId,
+			@QueryParam("password") String password) {
+		System.out.println("get profile of user :" + emailId + ":password:" + password);
+		String result = ProfileDBServices.getProfile(emailId, password);
+		return result;
+	}
+
+
 }

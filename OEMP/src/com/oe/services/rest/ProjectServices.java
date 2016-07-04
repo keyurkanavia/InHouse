@@ -35,6 +35,22 @@ public class ProjectServices {
 	}
 	
 	/**
+	 * The method in turn calls ProjectDBServices.getPosts for fetching the Posts info JSON.
+	 * @param projectId
+	 * @return
+	 */
+	@Path("/getPosts")
+	@GET	
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String getPosts(
+			@QueryParam("proj_Id") String projectId) {
+		System.out.println("find Posts for Project : proj_Id:" + projectId);
+		String result= ProjectDBServices.getPosts(projectId);
+		return result;
+	}
+	
+	/**
 	 * The method in turn calls ProjectDBServices.updateProjDesc to update the project description in mongoDB.
 	 * @param projectId
 	 * @return

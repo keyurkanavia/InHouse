@@ -44,19 +44,49 @@ var getUrlParameter = function getUrlParameter(sParam) {
 
 function checkUserCookie() {
     var user=getCookie('username');
-    var usrFromURL = getUrlParameter('user_id');
-    if(usrFromURL != '' && usrFromURL != null){
-    	setCookie("username", usrFromURL, 30);
-    	return usrFromURL;
-    }else if (user != "") {
-        alert("Welcome again " + user);
+   if (user != "") {
+        //alert("Welcome again " + user);
         return user;
     } else {
-       user = prompt("Please enter your name:","");
-       if (user != "" && user != null) {
-           setCookie("username", user, 30);
+       alert("Please Login before proceeding");
        }
+ }
+
+function loginUser(){
+	var email = $('#email_id').val();
+	var password = $('#password').val();
+	
+	if (email != "" && email != null) {
+        setCookie("username", email, 30);
+        setCookie("password", password, 30);
+        //getProfile(user,"xyz");
     }
+}
+
+
+function getProfile(email,password){
+	var profile = null;
+	var projectId = '';
+    if (email == '') {
+    	alert("email Id passed is empty");
+    } else {
+    	emailID = 'email=' + email;
+    }
+	
+	var hr = new XMLHttpRequest();
+    hr.open("GET", "/oemp/rest/profileUpdate/getProfile?"+emailID, true);
+    hr.setRequestHeader("Content-type", "application/json",true);
+    hr.send(emailID);
+   
+    hr.onreadystatechange = function() {
+        if(hr.readyState == 4 && hr.status == 200) {
+        	 var profile = JSON.parse(hr.responseText);
+        	 console.log("profile = "+profile)
+        }
+    };
+	
+	return profile;
+	
 }
 
 

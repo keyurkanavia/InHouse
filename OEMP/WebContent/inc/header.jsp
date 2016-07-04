@@ -24,9 +24,30 @@
 			 					</li>
 			 					<li> <a href="technicalUpdates.jsp">Technology Updates</a></li>
 			 					<li> <a href="index.html">Q & A Forum</a></li>
-			 					<li> <a href="index.html">Sign In</a></li>
+			 					<li> <a href = "#" id ="sign" data-toggle="modal" data-target="#login-modal"> Login/Register</a></li>
 					</ul>	
 			    </div><!-- /.navbar-collapse -->
   			</div><!-- /.container-fluid -->
 		</nav>
+		
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id= "login-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">Login</h4>
+      </div>
+      <div class="modal-body">
+         <h1>Login to Your Account</h1><br>
+          <form>
+          <input type="text" placeholder="Email" id="email_id">
+          <input type="password" placeholder="Password" id="password">
+          <input type="submit" class="login loginmodal-submit" value="Login" onclick="loginUser()">
+          </form>
+        </div>
+        
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 </jsp>

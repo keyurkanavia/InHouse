@@ -10,7 +10,7 @@
 	  <div id="container">
 	  <table id="projHeader">
 		<tr id="projBannerContainer"><td id="logoContainer"><img id="logo" src="http://placehold.it/350x150"/></td>
-									 <td id="banner"><img src="http://placehold.it/850x250"/></td>
+									 <td id="descContainer"><div id="mainAreaItem"><div id="editDescBar"><a href="#" ><span id="editDesc">edit</span></a></div><div id="description"></div><a class="act">More</a></div></td>
 		</tr>
 		<!-- <tr>
 			<td colspan="2">
@@ -21,10 +21,6 @@
 		
 		<div id="projMid">
 		<div id="mainArea">
-		<div id="mainAreaItem">
-		<div id="description"></div>
-<a class="act">More</a><div id="editDescBar"><a href="#" ><span id="editDesc">edit</span></a></div>
-</div>
 
 <div id="mainAreaItem">
 	<h1>Posts</h1>

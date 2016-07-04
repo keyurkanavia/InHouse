@@ -250,4 +250,24 @@ public class ProfileDBServices extends DBServices{
 		System.out.println("findProfile:result:" + output);
 		return output;
 	}
+	
+
+	public static String getProfile(String emailId, String password) {
+		System.out.println("findEmployee: emailId:"+emailId + ":password:" + password);
+		Document result = null;
+		String output = null;
+		MongoCollection<Document> coll = getCollection("profile");
+		if (emailId != null) {
+			result = coll.find(eq("email", emailId)).first();
+		}
+
+		if(result == null) {
+			output = "{name : Not Found}";
+		} else {
+			output = result.toJson();
+		}
+		 
+		System.out.println("findEmployee:result:" + output);
+		return output;
+	}
 }

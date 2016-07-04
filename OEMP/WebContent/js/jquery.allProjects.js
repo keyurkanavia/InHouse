@@ -5,8 +5,6 @@ $(document).ready(function() {
 		refreshPageContent(false,user_id);
 	}
 	
-	
-	
 	function populateprojectList(data,userId){
 		var projList = document.getElementById('projectList');
 		var members = data.names;
@@ -14,11 +12,11 @@ $(document).ready(function() {
 			var linkItem = document.createElement('a');
 			var listItem = document.createElement('li');
 			
-			linkItem.setAttribute("id","proj"+i);
+			linkItem.setAttribute("id",+members[i].name);
 			linkItem.setAttribute("href","./projectPage.jsp?proj_id="+members[i].name+"&user_id="+userId);
 			linkItem.innerHTML=members[i].name;
 			listItem.appendChild(linkItem);
-			listItem.innerHTML=listItem.innerHTML+'<a href="#" style="float:right">delete</a>';
+			listItem.innerHTML=listItem.innerHTML+'<a href="#" value='+members[i].name+' style="float:right">delete</a>';
 			projList.appendChild(listItem);
 		}
 	}
@@ -38,4 +36,12 @@ $(document).ready(function() {
 	}
 	
 	init();
+	
+	var deletebtn = document.getElementById("allTeam");
+	
+	deletebtn.onclick = function() {
+	    
+		var projName = $('#team').clone();
+	}
+	
 })

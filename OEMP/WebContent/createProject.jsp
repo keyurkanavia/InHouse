@@ -11,7 +11,7 @@
 				<div>
 					<div>
 						<div class="action-line to-open">
-	<form class="form-horizontal" name="addProjForm" id="addProjForm" action="/oemp/rest/project/createNewProj">
+	<form class="form-horizontal" name="addProjForm" id="addProjForm" action="/oemp/rest/project/createNewProj" onsubmit="return redirect()">
   <fieldset>
     <legend>Create New Project</legend>
     <div class="form-group">

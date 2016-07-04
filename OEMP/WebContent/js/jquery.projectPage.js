@@ -12,6 +12,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
         }
     }
 };
+
 var projJSON;
 function init(){
 	console.log("init");
@@ -20,6 +21,7 @@ function init(){
 };
 
 function refreshPageContent(renderAll){
+	var user_id = checkUserCookie();
 	var proj_id = getUrlParameter('proj_id');
 	 var projectId = '';
 	    if (proj_id == '') {
@@ -47,12 +49,32 @@ function refreshPageContent(renderAll){
 }
 
 function populatePosts(){
-	var posts = projJSON.posts;
-	console.log(projJSON);
-	for(i=0;i<posts.length;i++){
-		console.log("posts items",posts[i].text);
-		addComment(posts[i].text);
-	}
+	var proj_id = getUrlParameter('proj_id');
+	var user_id = checkUserCookie();
+	
+	var projectId = '';
+    if (proj_id == '') {
+    	alert("Project Id passed is empty");
+    } else {
+    	projectId = 'proj_Id=' + proj_id;
+    }
+	
+	var hr = new XMLHttpRequest();
+    hr.open("GET", "/oemp/rest/project/getPosts?"+projectId, true);
+    hr.setRequestHeader("Content-type", "application/json",true);
+    hr.send(projectId);
+   
+    hr.onreadystatechange = function() {
+        if(hr.readyState == 4 && hr.status == 200) {
+        	 var data = JSON.parse(hr.responseText);
+        	 projJSON = data;
+        	 var posts = data.posts;
+        	 for(i=0;i<posts.length;i++){
+        			console.log("posts items",posts[i].text);
+        			addComment(posts[i].text,posts[i].user);
+        		}
+        }
+    };
 }
 
 function populateDescription(){
@@ -89,7 +111,7 @@ function updatePostToMongoDB(postText) {
         type: 'post',
         dataType: 'json',
         contentType: 'application/json',
-        data: JSON.stringify({name:projId,proj_id:projId,posts:[{user:userId,text:postText}]}),
+        data: JSON.stringify({text:postText,user:userId,type:'info',source:projId,quest_id:'NA',dateOfCreation:new Date()}),
     });
 	console.log("After:updatePostToMongoDB called.");
 }
@@ -195,6 +217,7 @@ if (val == "More") {
     });
 var shifted = false;
 $("#comment").keypress(function(e) {
+	var user_id = checkUserCookie();
        var ev = e || window.event;
        var key = ev.keyCode || ev.which;
 	    var new_div = $('<div/>');
@@ -207,7 +230,7 @@ $("#comment").keypress(function(e) {
 			var eachLine = testText.trim();
 			if(eachLine != ''){
 				updatePostToMongoDB(text);
-				addComment(text);
+				addComment(text,user_id);
 				$('#comment').val('');
 			}
 			$('body').append(new_div);
@@ -231,17 +254,29 @@ $(document).keyup(function (e) {
     }
 	shifted = false;
 });
-function addComment(commentText){
+function addComment(commentText,user){
 	//alert("text = " + commentText);
-	var new_comment = $('#mainAreaItem').clone();
+	
+	
+	var new_comment = $("#mainAreaItem").clone();
+	
+	var userElement = createUserCommentHTML(user);
+	//new_comment.append(userElement);
+	new_comment.find('#description').before(userElement);
 	new_comment.find('#description').empty();
 	new_comment.find('#description').append(commentText);
 	new_comment.find('.act').remove();
 	new_comment.find('#description').css('height', 'auto');
+	new_comment.find('#description').css('display', 'inline-block');
 	new_comment.prependTo('#dashboard');
 	
 	//checkForURL(new_comment);
 };
+
+function createUserCommentHTML(user){
+	var userHTML = "<div style=\"width: 120px;display:inline-block\"><p>	<a><img src=\"images/mockImages/darth-vader1_opt.jpg\"style=\"height:48px; width:48px;\"></a><strong>"+user+"</strong><br><small><span><a >Member</a></span><br><br></small></p></div";
+	return userHTML;
+}
 
 function checkForURL(new_comment){
 	var $words = new_comment.find('#description').text().split(' ');
@@ -269,8 +304,8 @@ var editDescModal = $('#editDescModal');
 var btn = document.getElementById("allTeam");
 var editDescBtn = document.getElementById("editDesc");
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-var editDescSpan = document.getElementsByClassName("close")[1];
+var span = document.getElementsByClassName("close")[1];
+var editDescSpan = document.getElementsByClassName("close")[2];
 // When the user clicks the button, open the modal 
 btn.onclick = function() {
     

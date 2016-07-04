@@ -69,7 +69,7 @@ public class ProjectDBServices extends DBServices{
 		return output;
 	}
 	
-	public static String postInsert(String projectJson) {
+	public static String postInsertOldImpl(String projectJson) {
 		System.out.println("update post : projectJson:"+projectJson);
 		Document result = null;
 		String output = null;
@@ -94,9 +94,27 @@ public class ProjectDBServices extends DBServices{
 			output = "Updated";
 		}
 		System.out.println("updated Project Post:output:" + output);
+		
+		//insertPostToPostsColl(projectJson);
+		
+		
 		return output;
 	}
 
+
+	public static String postInsert(String projectJson) {
+		System.out.println("insert new post to posts collection : projectJson:"+projectJson);
+		String output = null;
+		Document current = Document.parse(projectJson);
+		String proj_id = current.getString("source");
+		MongoCollection<Document>postsColl = getCollection("posts");
+		
+		postsColl.insertOne(current);
+		output = "Created";
+		
+		System.out.println("Created new Post for project "+ proj_id +":output:" + output);
+		return output;
+	}
 
 	public static String getAllProjectList() {
 		System.out.println("get all Project List");
@@ -139,6 +157,37 @@ public class ProjectDBServices extends DBServices{
 			output = "Created";
 		}
 		System.out.println("new Project:output:" + output);
+		return output;
+	}
+
+	public static String getPosts(final String projectId) {
+		System.out.println("get Posts: project_id:"+projectId);
+		MongoCollection<Document>postsColl = getCollection("posts");
+		List<Document> foundDocument = null;
+		
+		Document result = null;
+		String output = null;
+		FindIterable<Document> iterable = postsColl.find();
+		final List<Document> pojectList = new ArrayList<Document>();
+		iterable.forEach(new Block<Document>() {
+		    @Override
+		    public void apply(final Document document) {
+		        System.out.println(document);
+		        if(document.get("source").equals(projectId)){
+		        	pojectList.add(new Document("user",document.get("user")).append("text", document.get("text")));
+		        }
+		    }
+		});
+		result = new Document("posts",pojectList);
+		
+		
+		if(result == null) {
+			output = "{project : Not Found}";
+		} else {
+			output = result.toJson();
+		}
+		 
+		System.out.println("getProjectData:result:" + output);
 		return output;
 	}
 
