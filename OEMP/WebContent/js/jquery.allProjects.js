@@ -16,7 +16,7 @@ $(document).ready(function() {
 			linkItem.setAttribute("href","./projectPage.jsp?proj_id="+members[i].name+"&user_id="+userId);
 			linkItem.innerHTML=members[i].name;
 			listItem.appendChild(linkItem);
-			listItem.innerHTML=listItem.innerHTML+'<a href="#" value='+members[i].name+' style="float:right">delete</a>';
+			listItem.innerHTML=listItem.innerHTML+'<a href="#" value='+members[i].name+' style="float:right" onclick="deleteProject(\'' + members[i].name +'\')">delete</a>';
 			projList.appendChild(listItem);
 		}
 	}
@@ -37,11 +37,30 @@ $(document).ready(function() {
 	
 	init();
 	
-	var deletebtn = document.getElementById("allTeam");
-	
-	deletebtn.onclick = function() {
-	    
-		var projName = $('#team').clone();
-	}
-	
 })
+
+function deleteProject(proj_id){
+	 var projectId = '';
+	    if (proj_id == '') {
+	    	alert("Project Id passed is empty");
+	    } else {
+	    	projectId = 'proj_Id=' + proj_id;
+	    }
+	    
+	    
+	var hr = new XMLHttpRequest();
+    hr.open("GET", "/oemp/rest/project/deleteProj?"+projectId, true);
+    hr.setRequestHeader("Content-type", "application/json",true);
+    hr.send(projectId);
+	   
+	    hr.onreadystatechange = function() {
+	        if(hr.readyState == 4 && hr.status == 200) {
+	        	 var data = hr.responseText;
+	        	 if(data=="success"){
+	        	 	alert("Project "+proj_id+" successfully deleted");
+	        	 }else{
+	        		 alert("Project "+proj_id+" delete operation failed");
+	        	 }
+	    }  
+	    };
+}

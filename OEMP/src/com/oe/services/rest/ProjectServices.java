@@ -112,4 +112,21 @@ public class ProjectServices {
 		String result= ProjectDBServices.createNewProj(projectJson);
 		return result;
 	}
+	
+	
+	/**
+	 * The method in turn calls ProjectDBServices.deleteProj to delete the project from projects collection in mongoDB.
+	 * @param projectId
+	 * @return
+	 */
+	@Path("/deleteProj")
+	@GET
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deleteProj(
+			@QueryParam("proj_Id") String projectId) {
+		String result = null;
+		System.out.println("Delete project :" + projectId);
+		result = ProjectDBServices.deleteProj(projectId);
+		return result;
+	}
 }

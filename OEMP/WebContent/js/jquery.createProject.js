@@ -74,12 +74,12 @@ function addProject() {
 
 		console.log('team = '+team);
 		
-		alert("Description "+projDesc);
+		//alert("Description "+projDesc);
 		var dataVar =JSON.stringify({name:projName,proj_id:projName,proj_desc:projDesc,lastModifiedDate:new Date(),lastMofifiedFields:[],author:proj_author,team:[]});
 		
 		var newData = insert(dataVar,dataVar.length-2,team)
 		console.log('NewData = '+newData);
-		alert("Add Project called");
+		//alert("Add Project called");
 	    $.ajax({
 	        url: "/oemp/rest/project/createNewProj",
 	        type: 'post',
@@ -138,13 +138,6 @@ function populateFormFields(){
     };
 	
 }
-
-window.onload=function() {
-	  document.getElementById("form1").onsubmit=function() {
-	    window.location.replace("login.php");
-	    return false;
-	  }
-	}
 
 $(document).ready(function() {
 	 
