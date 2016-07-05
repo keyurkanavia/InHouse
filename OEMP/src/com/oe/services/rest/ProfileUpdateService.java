@@ -30,18 +30,7 @@ public class ProfileUpdateService {
 		String result = ProfileDBServices.updateProfile(profileJson);
 		return result;
 	}
-	
-	
-	@Path("/getProfileUpdates")
-	@GET	
-	@Produces(MediaType.APPLICATION_JSON)
-	public String getProfileUpdates() {
-		List<String> result = ProfileDBServices.getAllUpdateOfProfile();
-		String res=result.toString();
-		System.out.println(res);
-		return res;
-	}
-	
+
 	@Path("/findProfile")
 	@GET	
 	@Produces(MediaType.APPLICATION_JSON)
@@ -61,9 +50,18 @@ public class ProfileUpdateService {
 		return result;
 	}
 	
+	@Path("/addProfile")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String addProfile(
+			String profileJson
+			) {
+		System.out.println("updateProfile:profileJson:" + profileJson);
+		String result = ProfileDBServices.addProfile(profileJson);
+		return result;
+	}
 	
-	
-
 	@Path("/getProfile")
 	@GET	
 	@Produces(MediaType.APPLICATION_JSON)

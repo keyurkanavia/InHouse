@@ -29,148 +29,60 @@ import com.mongodb.client.MongoCollection;
 public class ProfileDBServices extends DBServices{
 	
 	public static MongoCollection<Document> profileColl;
-	public static MongoCollection<Document> profileUpdateColl;
 	
 	
 	static{
 		profileColl = getCollection("profile");
-		profileUpdateColl = getCollection("profile_update");
 	}
 	/*
 	 * Update User Profile
 	 */
-	static ArrayList<BasicDBObject> listoFUpdatedColection = new ArrayList<BasicDBObject>();
 	public static String updateProfile(String profileJson) {
 		System.out.println("profileUpdate: profileJson:"+profileJson);
 		Document result = null;
 		String output = null;
 		Document current = Document.parse(profileJson);
+		current.put("lastModifiedDate", getCurrentDate());
 		String _id = current.getString("_id");
 		if (_id != null) {
 			result = profileColl.find(eq("_id", _id)).first();
 		}
-		listoFUpdatedColection.clear();
 		if (result != null ) {
-			if(!result.getString("fname").toString().equals(current.getString("fname").toString())){
-				updateProfileJsonDocument("fname",current,result);
-			}
-			if(!result.getString("lname").toString().equals(current.getString("lname").toString())){
-				updateProfileJsonDocument("lname",current,result);
-			}
-			if(!result.getString("mname").toString().equals(current.getString("mname").toString())){
-				updateProfileJsonDocument("mname",current,result);
-			}
-			if(!result.getString("email").toString().equals(current.getString("email").toString())){
-				updateProfileJsonDocument("email",current,result);
-			}
-			if(!result.getString("cellphone").toString().equals(current.getString("cellphone").toString())){
-				updateProfileJsonDocument("cellphone",current,result);
-			}
-			if(!result.getString("skype_id").toString().equals(current.getString("skype_id").toString())){
-				updateProfileJsonDocument("skype_id",current,result);
-			}
-			if(!result.getString("gender").toString().equals(current.getString("gender").toString())){
-				updateProfileJsonDocument("gender",current,result);
-			}
-			if(!result.getString("dob").toString().equals(current.getString("dob").toString())){
-				updateProfileJsonDocument("dob",current,result);
-			}
-			if(!result.getString("country").toString().equals(current.getString("country").toString())){
-				updateProfileJsonDocument("country",current,result);
-			}
 			
-			if(!result.getString("city").toString().equals(current.getString("city").toString())){
-				updateProfileJsonDocument("city",current,result);
-			}
-			if(!result.getString("interest").toString().equals(current.getString("interest").toString())){
-				updateProfileJsonDocument("interest",current,result);
-			}
-			if(!result.getString("language").toString().equals(current.getString("language").toString())){
-				updateProfileJsonDocument("language",current,result);
-			}
-			if(!result.getString("high_degree").toString().equals(current.getString("high_degree").toString())){
-				updateProfileJsonDocument("high_degree",current,result);
-			}
-			if(!result.getString("College").toString().equals(current.getString("College").toString())){
-				updateProfileJsonDocument("College",current,result);
-			}
-			if(!result.getString("Course").toString().equals(current.getString("Course").toString())){
-				updateProfileJsonDocument("Course",current,result);
-			}
-			if(!result.getString("doj").toString().equals(current.getString("doj").toString())){
-				updateProfileJsonDocument("doj",current,result);
-			}
-			if(!result.getString("skills").toString().equals(current.getString("skills").toString())){
-				updateProfileJsonDocument("skills",current,result);
-			}
-			if(!result.getString("curr_project").toString().equals(current.getString("curr_project").toString())){
-				updateProfileJsonDocument("curr_project",current,result);
-			}
-			if(!result.getString("curr_role").toString().equals(current.getString("curr_role").toString())){
-				updateProfileJsonDocument("curr_role",current,result);
-			}
-			if(!result.getString("pre_project").toString().equals(current.getString("pre_project").toString())){
-				updateProfileJsonDocument("pre_project",current,result);
-			}
-			if(!result.getString("pre_role").toString().equals(current.getString("pre_role").toString())){
-				updateProfileJsonDocument("pre_role",current,result);
-			}
-			
-			BasicDBObject document=new BasicDBObject();
-			for(int i=0;i<listoFUpdatedColection.size();i++){
-				document =listoFUpdatedColection.get(i);
-				addUpdateProfile(document.toString());
-				document=null;
-			}
-				
 			profileColl.updateOne(eq("_id", _id), new Document("$set", current));
 			output = "Updated";
 		} 
 		System.out.println("updateProfile:output:" + output);
 		return output;
 	}
-
-	public static void updateProfileJsonDocument(String fieldName,Document current,Document result){
-		BasicDBObject document= new BasicDBObject();
-		document.put("fname",current.getString("fname"));
-		document.put("lname",current.getString("lname"));
-		document.put("profile_id",current.getString("_id"));
-		document.put("updateType","lname");
-		document.put("preValue",result.getString(fieldName));
-		document.put("newValue",current.getString(fieldName));
-		document.put("date",getCurrentDate());
-		String name="document";
-		listoFUpdatedColection.add(document);
-	}
-	
-	/*
-	 * Add Data to updateProfile Collection
+	/**
+	 * add profile to collection
+	 * 
+	 * @param profileJson
+	 * @return output
 	 */
-	public static String addUpdateProfile(String profileJson) {
-		System.out.println("addUpdateProfile: profileJson:"+profileJson);
+	
+	public static String addProfile(String profileJson) {
+		System.out.println("addEmployee: profileJson:"+profileJson);
+		Document result = null;
 		String output = null;
+		MongoCollection<Document> coll =  getCollection("profile");
 		Document current = Document.parse(profileJson);
-		current.put("_id","PU"+getNextId("proupdateid","profile_update"));
-		profileUpdateColl.insertOne(current);
-		output = "Created update Profile";
-		return profileJson;
-	}
-	
-	/*
-	 * Get All Update Profile Data
-	 */
-	public static List<String> getAllUpdateOfProfile() {
-		List<Document> foundDocument = profileUpdateColl.find().into(new ArrayList<Document>());
-		List<String> jsonArray = new ArrayList<String>();
-		System.out.println(foundDocument.size());
-		foundDocument.remove(0);
-	
-		for (Document document : foundDocument) {
-			jsonArray.add(document.toJson());
+		
+		String email_id = current.getString("email");
+		if (email_id != null) {
+			result = coll.find(eq("email", email_id)).first();
 		}
-		return jsonArray;
+		if (result != null ) {
+			output="Email ALready Exists";
+		} else {
+			current.put("_id","PR"+getNextId("profileid","profile"));
+			coll.insertOne(current);
+			output = "Created";
+		}
+		System.out.println("addProfile:output:" + output);
+		return output;
 	}
-	
 	/*
 	 * Get Profile Date By ID
 	 */

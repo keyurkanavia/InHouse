@@ -11,18 +11,25 @@
 		<div class="container border_profile">
 		<p align="right">
                 <input type="button" value=" Edit " class="edit"/>
+                 <input type="button" value=" Add " class="add"/>
                 </p>
                <form name="save"  id="update" action="/rest/updateProfile">
                 		<p align="right">
-                <input type="button" value=" Save " class="save"onclick="ajaxUpdateProfile();"/>
+                <input type="button" value=" Save " class="save_oldProfile"onclick="ajaxUpdateProfile();"/>
                 </p>
                 </form>
+                  <form name="add"  id="add" action="/rest/addProfile">
+                		<p align="right">
+                <input type="button" value=" Save " class="save_newProfile"onclick="ajaxAddProfile();"/>
+                </p>
+                </form>
+                
 			<div style="margin-left:50px">
-		<input type="hidden" name="_id" class="_id"/>
+				<input type="hidden" name="_id" class="_id"/>
 				<h4 style="font-family:courier"><b>Name:</b><b class="name"></b></h4>
 	            <img src="" alt= "place holder" width="154" height="200" align="left" class="profile_img"/>
 			</div>
-			<div style="margin-left:250px">
+			<div style="margin-left:250px" id="profile_page">
 					  <legend>Contact Information</legend>
 	  				  <table style="margin-top:-130px;">
 		  				  <tr><td>First name:</td><td class="fname"></td></tr><br/>
