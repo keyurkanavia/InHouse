@@ -21,9 +21,10 @@ function drop(ev) {
     
 }
 
-function clearForm(){
+function redirectToProjectPage(proj_author,projName){
 	$('#name').val();
 	document.getElementById('description').value = '';
+	window.location="http://localhost:8080/oemp/projectPage.jsp?proj_id="+projName+"&user_id="+proj_author;
 }
 
 function checkValidation(){
@@ -86,7 +87,7 @@ function addProject() {
 	        dataType: 'json',
 	        contentType: 'application/json',
 	        data: newData,
-	        success: clearForm()
+	        success: redirectToProjectPage(proj_author,projName),
 	    });
 	}
 }
