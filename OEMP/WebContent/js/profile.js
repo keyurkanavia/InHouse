@@ -44,6 +44,7 @@ $(document).ready(function(){
 				createInput("curr_role1","curr_role");
 				createInput("pre_project1","pre_project");
 				createInput("pre_role1","pre_role");
+				$(".profileImage").append(" <input type='file' onchange='readImageURL(this);' />");
 				oldDataArray.push({"id":$("._id").val(),
 					"fname":$(".fname1").val(),
 					"mname":$(".mname1").val(),
@@ -197,9 +198,9 @@ $(document).ready(function(){
 				//	console.log(newDataArray);
 					var diff=compareArray(oldDataArray,newDataArray);
 					
-					console.log(diff);
+					//console.log(diff);
 					
-					if(diff.length>0){
+					
 				    $.ajax({
 				        url: "/oemp/rest/profileUpdate/updateProfile",
 				        type: 'post',
@@ -231,11 +232,8 @@ $(document).ready(function(){
 					}),
 					success : hideTextFieldAfterEdit()
 				    });
-					}
-					else
-						{
-						 hideTextFieldAfterEdit();
-						}
+					
+					
 				}
 				function ajaxAddProfile() {
 					  $.ajax({
@@ -305,7 +303,7 @@ $(document).ready(function(){
 			}
 			
 			
-			var diff =[];
+			var diff =new Object();
 			function compareArray(oldArray,newArray){
 				var myOldObject=oldArray.pop();
 				var myNewObject=newArray.pop();
@@ -314,12 +312,13 @@ $(document).ready(function(){
 						if(key==key1){
 							if(myOldObject[key]!=myNewObject[key1]){
 								//alert(myNewObject[key1]);
-								//diff[key]=myNewObject[key1];
-								diff.push(key);
+								diff[key]=myNewObject[key1];
+								//diff.push(key);
 							}
 						}
 					}
 				}
-				//console.log(diff);
+			//	console.log(diff);
 				return diff;
 			}
+		
