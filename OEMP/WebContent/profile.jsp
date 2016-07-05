@@ -1,4 +1,3 @@
-<jsp>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,20 +10,20 @@
 		<div class="container border_profile">
 		<p align="right">
                 <input type="button" value=" Edit " class="edit"/>
-                 <input type="button" value=" Add " class="add"/>
+                <!--  <input type="button" value=" Add " class="add"/> -->
                 </p>
                <form name="save"  id="update" action="/rest/updateProfile">
                 		<p align="right">
                 <input type="button" value=" Save " class="save_oldProfile"onclick="ajaxUpdateProfile();"/>
                 </p>
                 </form>
-                  <form name="add"  id="add" action="/rest/addProfile">
+                <!--   <form name="add"  id="add" action="/rest/addProfile">
                 		<p align="right">
                 <input type="button" value=" Save " class="save_newProfile"onclick="ajaxAddProfile();"/>
                 </p>
-                </form>
+                </form> -->
                 
-			<div style="margin-left:50px">
+			<div style="margin-left:50px" class="profileImage">
 				<input type="hidden" name="_id" class="_id"/>
 				<h4 style="font-family:courier"><b>Name:</b><b class="name"></b></h4>
 	            <img src="" alt= "place holder" width="154" height="200" align="left" class="profile_img"/>
@@ -74,4 +73,3 @@
 		<script src="./js/profile.js"></script>
 	</body>
 </html>	
-</jsp>
