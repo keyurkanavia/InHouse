@@ -39,8 +39,8 @@
       </div>
       <div class="modal-body">
          <h1>Login to Your Account</h1><br>
-          <form>
-          <input type="text" placeholder="Email" id="email_id">
+          <form method="post">
+          <input type="text" placeholder="Username" id="email_id">
           <input type="password" placeholder="Password" id="password">
           <input type="submit" class="login loginmodal-submit" value="Login" onclick="loginUser()">
           </form>

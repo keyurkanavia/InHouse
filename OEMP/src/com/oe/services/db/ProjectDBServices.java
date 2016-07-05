@@ -191,4 +191,21 @@ public class ProjectDBServices extends DBServices{
 		return output;
 	}
 
+	public static String deleteProj(String projectId) {
+		System.out.println("Delete Project : "+projectId);
+		Document result = null;
+		String output = null;
+		if (projectId != null) {
+			projectColl.deleteOne(eq("proj_id", projectId));
+			result = projectColl.find(eq("proj_id", projectId)).first();
+		}
+		if (result != null ) {
+			output = "failed";
+		} else {			
+			output = "success";
+		}
+		System.out.println("Delete Project:output:" + output);
+		return output;
+	}
+
 }
