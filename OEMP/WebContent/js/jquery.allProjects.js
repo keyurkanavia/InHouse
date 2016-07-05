@@ -56,11 +56,11 @@ function deleteProject(proj_id){
 	    hr.onreadystatechange = function() {
 	        if(hr.readyState == 4 && hr.status == 200) {
 	        	 var data = hr.responseText;
-	        	 if(data=="success"){}
+	        	 if(data=="success"){
 	        	 	alert("Project "+proj_id+" successfully deleted");
 	        	 }else{
 	        		 alert("Project "+proj_id+" delete operation failed");
 	        	 }
-	        
+	    }  
 	    };
 }
