@@ -163,6 +163,21 @@ public class ProfileDBServices extends DBServices{
 		return output;
 	}
 	
+	
+
+	/*
+	 * Get all profiles for Home page
+	 */
+	public static List<String> getProfileUpdate(){
+			MongoCollection<Document> coll = getCollection("profile");
+			List<Document> foundDocument = coll.find().into(new ArrayList<Document>());
+			List<String> jsonArray = new ArrayList<String>();
+			for (Document document : foundDocument) {
+				jsonArray.add(document.toJson());
+			}
+			return jsonArray;
+	}
+	
 
 	public static String getProfile(String emailId, String password) {
 		System.out.println("findEmployee: emailId:"+emailId + ":password:" + password);

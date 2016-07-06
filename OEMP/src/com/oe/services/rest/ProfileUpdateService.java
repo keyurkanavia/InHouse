@@ -72,6 +72,17 @@ public class ProfileUpdateService {
 		String result = ProfileDBServices.getProfile(emailId, password);
 		return result;
 	}
+	
+	@Path("/getProfileUpdates")
+	@GET	
+	@Produces(MediaType.APPLICATION_JSON)
+	public String getProfileUpdates() {
+		System.out.println("Get all profile for home page");
+		List<String> result = ProfileDBServices.getProfileUpdate();
+		String res=result.toString();
+		System.out.println(res);
+		return res;
+	}
 
 
 }
