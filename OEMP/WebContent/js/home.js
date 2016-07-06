@@ -63,6 +63,7 @@ $(document).ready(function(){
 		        				  $(".more").hide();
 		        				  $('.less').show();
 		        				  $(".technical").hide();
+		        				  $('.profile_update div').remove();
 		        		
 		        				  var arr_length_more=arr.length;
 		        				  if(arr.length<=10){
