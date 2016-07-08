@@ -179,8 +179,8 @@ public class ProfileDBServices extends DBServices{
 	}
 	
 
-	public static String getProfile(String emailId, String password) {
-		System.out.println("findEmployee: emailId:"+emailId + ":password:" + password);
+	public static String getProfile(String emailId) {
+		System.out.println("findEmployee: emailId:"+emailId );
 		Document result = null;
 		String output = null;
 		MongoCollection<Document> coll = getCollection("profile");
@@ -189,7 +189,7 @@ public class ProfileDBServices extends DBServices{
 		}
 
 		if(result == null) {
-			output = "{name : Not Found}";
+			output = "null";
 		} else {
 			output = result.toJson();
 		}
@@ -197,4 +197,5 @@ public class ProfileDBServices extends DBServices{
 		System.out.println("findEmployee:result:" + output);
 		return output;
 	}
+
 }

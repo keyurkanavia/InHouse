@@ -6,6 +6,8 @@
 
 
 $(document).ready(function(){
+	 checkUserCookie(); 
+	 profileUrl();
 	var home='home';
 			$('.less').hide();
 			ajaxViewProfileUpdate();

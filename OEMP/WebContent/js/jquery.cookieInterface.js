@@ -46,47 +46,47 @@ function checkUserCookie() {
     var user=getCookie('username');
    if (user != "") {
         //alert("Welcome again " + user);
+	   $("#sign").hide();
+	   $("#profile").show();
         return user;
     } else {
        alert("Please Login before proceeding");
+       $("#sign").show();
+       $("#profile").hide();
        }
  }
 
 function loginUser(){
 	var email = $('#email_id').val();
 	var password = $('#password').val();
-	
-	if (email != "" && email != null) {
-        setCookie("username", email, 30);
-        setCookie("password", password, 30);
-        //getProfile(user,"xyz");
-    }
+	alert(email);
+	  var hr = new XMLHttpRequest();
+	  var url="/oemp/rest/profileUpdate/getProfile?email="+email;
+	  	alert("URL:"+url);
+	    hr.open("GET", url, true);
+	    hr.setRequestHeader("Content-type", "application/json",true);
+	    hr.send(email);
+	   
+	    hr.onreadystatechange = function() {
+	        if(hr.readyState == 4 && hr.status == 200) {
+	        	 var data = JSON.parse(hr.responseText);
+	        	if(data!=null){
+	        	 setCookie("username", data.fname, 30);
+	        	 setCookie("id", data._id, 30);
+	        	 location.reload();
+	        	 }else{
+	        		 alert("Invalid User");
+	        	 }
+	        }
+	    };
 }
 
 
-function getProfile(email,password){
-	var profile = null;
-	var projectId = '';
-    if (email == '') {
-    	alert("email Id passed is empty");
-    } else {
-    	emailID = 'email=' + email;
-    }
-	
-	var hr = new XMLHttpRequest();
-    hr.open("GET", "/oemp/rest/profileUpdate/getProfile?"+emailID, true);
-    hr.setRequestHeader("Content-type", "application/json",true);
-    hr.send(emailID);
-   
-    hr.onreadystatechange = function() {
-        if(hr.readyState == 4 && hr.status == 200) {
-        	 var profile = JSON.parse(hr.responseText);
-        	 console.log("profile = "+profile)
-        }
-    };
-	
-	return profile;
-	
+function profileUrl(){
+	var id=getCookie("id");
+	var href="profile.jsp?id="+id;
+	 $("#profile").attr("href",href);
 }
+
 
 

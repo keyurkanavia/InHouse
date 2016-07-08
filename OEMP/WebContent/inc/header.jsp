@@ -25,6 +25,7 @@
 			 					<li> <a href="technicalUpdates.jsp">Technology Updates</a></li>
 			 					<li> <a href="index.html">Q & A Forum</a></li>
 			 					<li> <a href = "#" id ="sign" data-toggle="modal" data-target="#login-modal"> Login/Register</a></li>
+			 					<li> <a href = "profile.jsp" id ="profile" > Profile</a></li>
 					</ul>	
 			    </div><!-- /.navbar-collapse -->
   			</div><!-- /.container-fluid -->
@@ -39,10 +40,10 @@
       </div>
       <div class="modal-body">
          <h1>Login to Your Account</h1><br>
-          <form method="post">
-          <input type="text" placeholder="Username" id="email_id">
+          <form id="login_from">
+          <input type="text" placeholder="email" id="email_id">
           <input type="password" placeholder="Password" id="password">
-          <input type="submit" class="login loginmodal-submit" value="Login" onclick="loginUser()">
+          <input type="button" class="login loginmodal-submit" value="Login" onclick="loginUser()">
           </form>
         </div>
         
