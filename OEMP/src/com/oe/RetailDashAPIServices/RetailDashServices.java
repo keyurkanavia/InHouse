@@ -25,10 +25,10 @@ public class RetailDashServices {
 			builder.type(MediaType.APPLICATION_JSON);
 			builder.header("app-Id", "lcJ6wXeUQTi9ick8").header("api-Key", "rEwMu8Otd4wDRC7IKGGhhUvLOWgYxX9j");
 
-			ClientResponse response = builder.head();
+			String response = builder.get(String.class);
 			
 			System.out.println("Output from Server .... \n");
-			System.out.println(response.getHeaders());
+			System.out.println(response.toString());
 
 		  } catch (Exception e) {
 
