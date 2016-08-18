@@ -1,0 +1,20 @@
+create a mailbox in parser.zapier.com 
+forward an order email to the mailbox
+define an template of an email in mailbox which we have created.
+Go to zapier.com Click on MAKE A ZAP!
+-------------Trigger -----------------
+Select App as Email parser
+Select New email
+Map your parser.zapier.com accont with zapier.com by clicking in Connect new account
+Select Mailbox from dropdown
+Click on finish
+--------------Action-----------------------
+Select MonogoDB as a App
+Select Create new Document
+Map you mongodb account with the zapier.com
+select  mongodb Database from dropdown
+select collection from dropdown
+Now add extract the data you want from template of an email defined in a parser.zapier.com as a Key-value 
+click on finish 
+
+
