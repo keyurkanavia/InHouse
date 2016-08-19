@@ -11,7 +11,9 @@ import br.com.multiplusfidelidade.ebs.v1.ConsultarProdutoResgateOutput;
 import br.com.multiplusfidelidade.ebs.v1.CotarLocacaoVeiculoParceiroFaultMsg;
 import br.com.multiplusfidelidade.ebs.v1.CotarLocacaoVeiculoParceiroOutput;
 import br.com.multiplusfidelidade.ebs.v1.ErroTecnicoFaultMsg;
+import br.com.multiplusfidelidade.framework.business.datatype.CalcularPrecoPontosInterface4DTO;
 import br.com.multiplusfidelidade.framework.business.datatype.CalcularPrecoPontosInterface4SaidaDTO;
+import br.com.multiplusfidelidade.framework.business.datatype.impl.CalcularPrecoPontosInterface4DTOImpl;
 
 public class ConversionWSClient {
 	
@@ -25,7 +27,7 @@ public class ConversionWSClient {
 	 
 	 public static void main(String[] args){
 		 ConversionWSClient client = new ConversionWSClient();
-		 client.calculatePriceToPoints("1-1MASJ1O","8740769");
+		 client.calculatePriceToPoints("1-OWIFV1","17629627");
 	 }
 	 
 	 
@@ -35,6 +37,15 @@ public class ConversionWSClient {
 	            ConsultarProdutoResgateOutput output = null;
 	            if (returnMap.get(loyaltyCode) != null) {
 	                output = (ConsultarProdutoResgateOutput) returnMap.get(loyaltyCode);
+	                CalcularPrecoPontosInterface4SaidaDTO priceResultObj = getCalculateMPPoints().getPriceResultObj(new BigDecimal(3),
+	                		new BigDecimal(4), output);
+	                Long listPoints = ((CalcularPrecoPontosInterface4SaidaDTO) priceResultObj).getPrecoDePontos();
+					Long salePoints = ((CalcularPrecoPontosInterface4SaidaDTO) priceResultObj).getPrecoPorPontos();
+					
+					System.out.println("List Points = "+listPoints);
+					System.out.println("Sale Points = "+salePoints);
+					
+					
 	            }
 	        } catch (Exception ex) {
 	            throw ex;
@@ -52,6 +63,10 @@ public class ConversionWSClient {
 
 	public void setConversionRateService(ConversionRateService conversionRateService) {
 		this.conversionRateService = conversionRateService;
+	}
+
+	public void setCalculateMPPoints(CalcMPPoints calculateMPPoints) {
+		this.calculateMPPoints = calculateMPPoints;
 	}
 	
 }
