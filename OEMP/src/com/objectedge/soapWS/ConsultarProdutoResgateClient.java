@@ -23,7 +23,7 @@ import br.com.multiplusfidelidade.ebs.v1.ErroTecnicoFaultMsg;
  * @author Object Edge Inc.
  *
  */
-public class ConsultarProdutoResgateClient extends SecureClient {
+public class ConsultarProdutoResgateClient extends SecureClient implements AdapterConstants{
 	
 	
 	private ConsultarProdutoResgatev1 client;
@@ -31,12 +31,7 @@ public class ConsultarProdutoResgateClient extends SecureClient {
 	private ConversionRateMessageAdapter messageAdapter;
 	private Integer interfaceId = 1; 
 	private boolean initialised;
-	String ERROR = "error";
-	String RETURN_CODE = "RETURN_CODE";
-	int SUCCESS = 0;
-	int TECH_ERROR = 1;
-	int BUSINESS_ERROR = 2;
-	int INTERFACEID = 1;
+	
 	/**
 	 * @param wsdl
 	 * @param userName

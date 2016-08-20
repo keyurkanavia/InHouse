@@ -3,6 +3,7 @@ package com.objectedge.soapWS;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+
 import br.com.multiplusfidelidade.ebs.v1.ConsultarProdutoResgateFaultMsg;
 import br.com.multiplusfidelidade.ebs.v1.ErroTecnicoFaultMsg;
 
@@ -11,12 +12,8 @@ import br.com.multiplusfidelidade.ebs.v1.ErroTecnicoFaultMsg;
  * 
  * @author Object Edge Inc.
  */
-public class ConversionRateService{	
+public class ConversionRateService implements AdapterConstants{	
 	
-	private static final String BARRAMENTO_ERROR = "BARRAMENTO_ERROR";
-	private static final String GENERIC_EXCEPTION = "Exception while calling ConsultarProdutoResgate for loyaltyCode:[{0}], [{1}]";
-	private static final String TECH_EXCEPTION = "Tech error while calling ConsultarProdutoResgate for loyaltyCode:[{0}], service errorCode:[{1}], errorMsg:[{2}]";
-	private static final String FAULT_EXCEPTION = "Fault Exception while calling ConsultarProdutoResgate for loyaltyCode:[{0}], service errorCode:[{1}], errorMsg:[{2}]";
 	private ConsultarProdutoResgateClient client;
 	private String endpoint;
 	private String userName;
@@ -24,10 +21,6 @@ public class ConversionRateService{
 	private String conversionRateTechErrorCode;
 	private String conversionRateBusinessErrorCode;
 	private boolean enabled;
-	String ERROR = "error";
-	String RETURN_CODE = "RETURN_CODE";
-	
-
 	
 	
 	ConversionRateService(){

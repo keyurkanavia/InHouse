@@ -17,14 +17,8 @@ import br.com.multiplusfidelidade.ebs.v1.ConsultarProdutoResgateOutput;
  * @author Object Edge Inc.
  *
  */
-public class ConversionRateMessageAdapter{
+public class ConversionRateMessageAdapter implements AdapterConstants{
 
-	String ERROR = "error";
-	String RETURN_CODE = "RETURN_CODE";
-	int SUCCESS = 0;
-	int TECH_ERROR = 1;
-	int BUSINESS_ERROR = 2;
-	int INTERFACEID = 1;
 	/**
 	 * Creates the ConsultarProdutoResgate Input object
 	 * @param loyaltyCode
